@@ -13,10 +13,11 @@ ofParameterGroup & ofx::patch::meter::RMS::label( string name ){
 void ofx::patch::meter::RMS::patch( ){
     
     addModuleInput("signal", rms ); 
-    
+    addModuleOutput("signal", envFollower );
+
     rms.set( 50.0f );
     
-    rms >> gain >> envFollower >> pdsp::blackhole();
+    rms >> gain >> envFollower;
 
     attackControl  >> envFollower.in_attack();
     releaseControl >> envFollower.in_release();
