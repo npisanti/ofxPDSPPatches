@@ -1,0 +1,29 @@
+
+#include "RMS.h"
+
+float ofx::patch::meter::RMS::meter() const { 
+    return envFollower.meter_output(); 
+}
+
+ofParameterGroup & ofx::patch::meter::RMS::label( string name ){
+    parameters.setName( name );
+    return parameters;
+}
+
+void ofx::patch::meter::RMS::patch( ){
+    
+    addModuleInput("signal", rms ); 
+    
+    rms.set( 50.0f );
+    
+    rms >> gain >> envFollower >> pdsp::blackhole();
+
+    attackControl  >> envFollower.in_attack();
+    releaseControl >> envFollower.in_release();
+        
+    parameters.setName( "rms envelope" );
+    parameters.add( gain.set( "band input gain", 0, -48, 36 ));  
+    parameters.add( attackControl.set( "attack ms", 5, 1, 80 ));
+    parameters.add( releaseControl.set( "release ms", 20, 1, 500 ));
+    
+}
