@@ -62,10 +62,6 @@ void ofx::patch::synth::SinePercussion::longerEnvelopes() {
     pEnvReleaseControl.set("p env release", 50, 5, 2000 ); 
 }
 
-void ofx::patch::synth::SinePercussion::pitch( int value ) {
-    pitchControl.getOFParameterInt().set( value );
-}
-
 void ofx::patch::synth::SinePercussion::enableDB( float minValue ){
     aEnv.enableDBTriggering( minValue, 0.0f);
 }
@@ -79,5 +75,8 @@ float ofx::patch::synth::SinePercussion::meter() const {
 
 pdsp::Patchable & ofx::patch::synth::SinePercussion::in_trig() {
     return in("trig");
+}
+pdsp::Patchable & ofx::patch::synth::SinePercussion::in_pitch() {
+    return in("pitch");
 }
 

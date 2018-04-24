@@ -1,0 +1,44 @@
+# like in old tracker, steps goes from up to down
+# the first column is always the chance of the row being played, 
+# - , ~ or | is full chance (1.0)
+# the others are the sequence outputs starting from 0,
+# - , ~ or |  is no message
+# in this case they are all used as triggers
+# ...and obiviously # is for commenting out lines!
+# you can switch the sequence start and number of step from the gui
+# useful to memorize more sequence into the same file, like this:
+#
+#--seq1 steps 0-15--
+-       1.0     1.0
+-       -       -
+0.5     1.0     -
+-       -       -
+-       1.0     -
+-       -       -
+-       1.0     1.0
+0.5     0.3     -
+-       -       0.3
+0.5     0.3     -
+-       1.0     -
+-       -       -
+-       -       -
+-       -       -
+-       -       -
+-       -       -
+#--seq2 steps 16-31--
+-       1.0     1.0
+-       -       -
+0.5     1.0     -
+-       -       -
+-       -       -
+-       -       -
+-       1.0     1.0
+0.5     0       -
+-       -       0.3
+0.5     0.3     -
+-       0.0     -
+-       -       -
+-       -       1.0
+-       -       -
+-       1.0     -
+-       -       -

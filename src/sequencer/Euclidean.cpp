@@ -28,33 +28,67 @@ ofx::patch::sequencer::Euclidean::Euclidean(){
     parameters.add( this->ghostsDynMax.set( "ghost max dyn", 0.4f, 0.0f, 1.0f) );
     parameters.add( this->seqShift.set( "shift", 0, -6, 6 ) );
     
-    parameters.add( this->automake.set( "automake", false ) );
-    parameters.add( this->repeat.set( "am counter", 1, 1, 16) );
-    parameters.add( this->remake.set( "remake", true) );    
+    parameters.add( this->autogenerate.set( "autogenerate", false ) );
+    parameters.add( this->repeat.set( "ag counter", 1, 1, 16) );
+    parameters.add( this->regenerate.set( "regenerate", true) );    
     
     parameters.add( this->gate.set("gate", 0.5f, 0.0001f, 1.0f ) );
     
+    lastX = lastY = -1;
+    
     code = [&] () noexcept {
         
-        if( automake && (counter() >= repeat) ){ resetCount(); } 
+        if( autogenerate && (counter() >= repeat) ){ resetCount(); } 
         
-        if( remake ){ resetCount(); }
+        if( regenerate ){ resetCount(); }
         
-        if( remake || (automake && counter() == 0) ){
+        if( regenerate || (autogenerate && counter() == 0) ){
 
             double g = gate;    
-            
-            float xt = x+pdsp::randomBipolar()*xJit;
-            float yt = y+pdsp::randomBipolar()*yJit;
 
-            int m = xt * steps;
-            int n = yt * steps;
+            // all this code to avoid repetition of same loop if possible -----
+            int newXMin = (x-xJit)*steps;
+            int newXMax = (x+xJit)*steps;
+            int newYMin = (y-yJit)*steps;
+            int newYMax = (y+yJit)*steps;
+
+            newXMin = (newXMin > 0) ? newXMin : 0;            
+            newYMin = (newYMin > 0) ? newYMin : 0;            
             int clip = steps;
-            m = ( m > 0 ) ? m : 0;
-            m = ( m < clip ) ? m : clip;
-            n = ( n > 1 ) ? n : 1;
-            n = ( n < clip ) ? n : clip;
+            newXMax = (newXMax<clip) ? newXMax : clip;
+            newYMax = (newYMax<clip) ? newYMax : clip;
             
+            int m, n;
+            if( newXMin == newXMax && newYMin == newXMax ){
+                m = newXMin;
+                n = newYMin;
+            }else if( newXMin == newXMax ){
+                m = newXMin;
+                n = lastY;
+                while( n==lastY ){
+                    n = pdspDice( newYMin, newYMax+1 );
+                }
+            }else if( newYMin == newYMax ){
+                m = lastX;
+                while( m==lastX ){
+                    m = pdspDice( newXMin, newXMax+1 );
+                }
+                n = newYMin;
+            }else{
+                m = lastX;
+                n = lastY;
+                while( m==lastX && n==lastY ){
+                    m = pdspDice( newXMin, newXMax+1 );
+                    n = pdspDice( newYMin, newYMax+1 );
+                }
+            }
+            lastX = m;
+            lastY = n;
+            // end of code for avoiding repetitions ---------------------------
+            // even like this in rare cases the same 4/4 pattern is repeated
+            // probably some combination produces the same pattern
+            // like this it's cheaper on the CPU, so it's fine
+                
             cword( bars, m, n, true);
             
             float gmin = ghostsDynMin;
@@ -63,13 +97,13 @@ ofx::patch::sequencer::Euclidean::Euclidean(){
             
             shift( bars, seqShift );
             
-            double length = (double)steps / division;
+            double length = (double) steps / division;
 
             begin( division, length);
                 trigVector(bars, g, 0);
             end();
             
-            remake = false;
+            regenerate = false;
         }
         
     };    

@@ -19,7 +19,7 @@ public:
     float meter() const ;
 
     pdsp::Patchable & in_trig();
-    void pitch( int value );
+    pdsp::Patchable & in_pitch();
 
     ofParameterGroup parameters;
 
