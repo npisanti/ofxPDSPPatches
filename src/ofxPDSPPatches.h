@@ -9,6 +9,7 @@
 #include "sequencer/Euclidean.h"
 #include "sequencer/PTracker.h"
 #include "sequencer/MarkovChain.h"
+#include "sequencer/Wolfram.h"
 
 #include "synth/KarplusStrong.h"
 #include "synth/SinePercussion.h"
