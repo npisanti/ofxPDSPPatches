@@ -25,7 +25,7 @@ void ofApp::update(){
 void ofApp::draw(){
     ofBackground(0);
     gui.draw();
-    ofDrawBitmapString("press load to choose a sample\nthen press 1-8 to trigger the sample with different intensities", 20, ofGetHeight()-40 );
+    ofDrawBitmapString("press load to choose a sample\nthen press 1-8 to trigger the sample\nwith different intensities", 20, ofGetHeight()-40 );
 }
 
 //--------------------------------------------------------------
