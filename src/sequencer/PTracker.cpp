@@ -55,7 +55,7 @@ ofx::patch::sequencer::PTracker::PTracker() {
     
 }
 
-void ofx::patch::sequencer::PTracker::load( std::string filepath ) {
+void ofx::patch::sequencer::PTracker::load( std::string filepath, bool autoreload ) {
     path = filepath;
     auto v = ofSplitString(path, "/" );
     string name = v[v.size()-1];
@@ -63,9 +63,13 @@ void ofx::patch::sequencer::PTracker::load( std::string filepath ) {
     parameters.setName(name);
     pdsp::Sequence::label = name;
 #if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)    
-    watcher.setCheckIntervalTimef( 0.03f );
-    watcher.addListener(this, &PTracker::onFileChange);
-	watcher.setTargetPath( filepath );
+    if( autoreload ){
+        watcher.setCheckIntervalTimef( 0.03f );
+        watcher.addListener(this, &PTracker::onFileChange);
+        watcher.setTargetPath( filepath );        
+    }else{
+        loadFile();        
+    }
 #else
     loadFile();
 #endif

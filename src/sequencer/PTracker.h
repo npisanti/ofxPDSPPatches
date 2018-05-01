@@ -15,7 +15,7 @@ class PTracker : public pdsp::Sequence{
 public:
     PTracker();
 
-    void load( std::string filepath );
+    void load( std::string filepath, bool autoreload=true );
 
     ofParameterGroup parameters;
         ofParameter<int>    division;

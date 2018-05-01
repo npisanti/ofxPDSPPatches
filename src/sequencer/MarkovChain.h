@@ -22,7 +22,7 @@ class MarkovChain : public pdsp::Sequence {
 public:
     MarkovChain();
 
-    void load ( std::string filepath ); 
+    void load ( std::string filepath, bool autoreload=true ); 
 
     ofParameter<int> division;
     ofParameter<int> steps;
