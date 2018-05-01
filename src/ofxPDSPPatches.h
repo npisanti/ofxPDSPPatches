@@ -24,6 +24,7 @@
 #include "synth/NoiseDevice.h"
 #include "synth/QuickSampler.h"
 #include "synth/MultiSampler.h"
+#include "synth/GrainDrone.h"
 
 #include "tuning/PitchTable.h"
 #include "tuning/PureTuning.h"
