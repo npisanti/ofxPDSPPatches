@@ -30,10 +30,9 @@ class ofApp : public ofBaseApp{
         ofxPDSPEngine   engine; 
         
         ofx::patch::sequencer::Wolfram wolframSeq;
+        ofx::patch::effect::BasiVerb reverb;
         
         std::vector<ofx::patch::synth::SinePercussion> zaps;
-        
-        pdsp::IRVerb reverb;
         
         ofxPDSPStereoFader dubSwitch;
 

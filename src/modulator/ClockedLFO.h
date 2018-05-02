@@ -15,6 +15,7 @@ public:
     ofParameterGroup parameters;
 
     ofParameterGroup & label( std::string name );  
+    ofParameterGroup & setup( std::string name, float multiply );
     
     float meter_output() const;
 
@@ -35,7 +36,7 @@ private:
     pdsp::Switch        lfoSwitch;
     ofxPDSPValue        divisionControl;
     
-    pdsp::BipolarToUnipolar b2u;
+    ofxPDSPValueMultiplier multiplier;
     
 };
     

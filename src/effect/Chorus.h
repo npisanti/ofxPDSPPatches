@@ -34,6 +34,9 @@ private:
     ofxPDSPValue    speedControl;
     ofxPDSPValue    depthControl;
     
+    ofxPDSPValue    bypass;
+    pdsp::Switch    bp0;
+    pdsp::Switch    bp1;
 };
     
 }}} // end namespaces 

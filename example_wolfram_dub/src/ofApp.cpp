@@ -89,8 +89,7 @@ void ofApp::setup(){
     // ----------- PATCHING -----------
     
     // loads reverb impulse response
-    reverb.loadIR( "data/kingtubby-fl1.wav");
-    
+
     zaps.resize(ZAPS_NUMBER);
     scopes.resize(ZAPS_NUMBER + 2);
     
@@ -100,10 +99,7 @@ void ofApp::setup(){
         zaps[i] >> engine.audio_out(0);
         zaps[i] >> engine.audio_out(1);
     
-        // patch the zaps to the reverb input 
-        float revGain = -60.0f; // -65dB, this IRs are very loud
-        zaps[i] * dB(revGain) >> reverb.in_L(); 
-        zaps[i] * dB(revGain) >> reverb.in_R();
+        zaps[i] >> reverb.in();
         zaps[i] >> dub.in("0");
         zaps[i] >> dub.in("1");
     }
@@ -131,6 +127,7 @@ void ofApp::setup(){
         gui.add( zaps[i].label("zap "+ofToString(i)) );
     }
     gui.add( dub.parameters );
+    gui.add( reverb.parameters );
     gui.loadFromFile("settings.xml");
     gui.minimizeAll();
     

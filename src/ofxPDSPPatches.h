@@ -25,6 +25,8 @@
 #include "synth/QuickSampler.h"
 #include "synth/MultiSampler.h"
 #include "synth/GrainDrone.h"
+#include "synth/DataSynth.h"
+#include "synth/WaveSynth.h"
 
 #include "tuning/PitchTable.h"
 #include "tuning/PureTuning.h"

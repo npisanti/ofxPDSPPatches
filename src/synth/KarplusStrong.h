@@ -10,7 +10,7 @@ namespace ofx { namespace patch { namespace synth {
 
 class KarplusStrong {
     
-// ----------------------------------------------------------------------------------------------------------------------------
+// ----------------------------- Voice class ----------------------------------
 public:
 
 class Voice : public pdsp::Patchable{ 
@@ -35,7 +35,6 @@ private:
 };    
 
 
-
     
 public: // ---------------------- public API ----------------------------------    
     
@@ -45,22 +44,23 @@ public: // ---------------------- public API ----------------------------------
     pdsp::Patchable & in_pitch( int voice );
     pdsp::Patchable & out_L();
     pdsp::Patchable & out_R();
+    pdsp::Patchable & out_voice( int voice );
     
     size_t size();
 
     ofParameterGroup parameters;
+
+    ofParameterGroup & label( std::string name );
     
 private: // -------------------------------------------------------------------  
 
-    std::vector<Voice>           voices;
+    std::vector<Voice>      voices;
     
     pdsp::Amp               ampL;
     pdsp::Amp               ampR;
     
     ofxPDSPValue            masterFader;
     pdsp::DBtoLin           dBtoLin;
-    
-    pdsp::DimensionChorus   chorus;       
 
     ofxPDSPValue     fbControl;
     ofxPDSPValue     dampingControl;
@@ -74,9 +74,6 @@ private: // -------------------------------------------------------------------
     ofxPDSPValue     filterModControl;
     ofxPDSPValue     filterModDecayControl;
     ofxPDSPValue     filterModVeloControl;
-
-    ofxPDSPValue     chorusSpeed;
-    ofxPDSPValue     chorusDepth;
 
 };
 

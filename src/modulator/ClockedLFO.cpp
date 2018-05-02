@@ -10,15 +10,21 @@ ofParameterGroup & ofx::patch::modulator::ClockedLFO::label( std::string name ){
     return parameters;
 }
 
+ofParameterGroup & ofx::patch::modulator::ClockedLFO::setup( std::string name, float multiply ){
+    multiplier.set( "amount", multiply, 0.0f, multiply );
+    parameters.setName(name);
+    return parameters;
+}
+
 void ofx::patch::modulator::ClockedLFO::patch(){
     
     addModuleInput( "phase",  lfo.in_phase_offset() );
-    addModuleOutput( "signal", b2u );
+    addModuleOutput( "signal", multiplier );
     
     divisionControl >> lfo.in_division();
     phaseControl >> lfo.in_phase_offset();
     
-    lfoSwitch >> b2u;
+    lfoSwitch >> multiplier;
     
     modeControl >> lfoSwitch.in_select();
     
@@ -30,14 +36,16 @@ void ofx::patch::modulator::ClockedLFO::patch(){
     lfo.out_sample_and_hold()   >> lfoSwitch.input(4);
     
     parameters.setName( "clocked LFO" );
-    parameters.add( pulse.set( "pulse", 1, 1, 16) );
-    parameters.add( divide.set( "divide", 1, 1, 16) );
-    parameters.add( phaseControl.set( "phase", 0.0f, 0.0f, 1.0f) );
-    parameters.add( modeControl.set( "shape", 0, 0, 4) );
-    
     divide.addListener( this, &ClockedLFO::recalculateDivision );
     pulse.addListener(  this, &ClockedLFO::recalculateDivision );
-    
+
+    parameters.add( divide.set( "divide", 1, 1, 16) );
+    parameters.add( pulse.set( "pulse", 4, 1, 16) );
+
+    parameters.add( phaseControl.set( "phase", 0.0f, 0.0f, 1.0f) );
+    parameters.add( modeControl.set( "shape", 0, 0, 4) );
+    parameters.add( multiplier.set( "amount", 1.0f, 0.0f, 1.0f) );
+        
 }
 
 float ofx::patch::modulator::ClockedLFO::meter_output() const {
