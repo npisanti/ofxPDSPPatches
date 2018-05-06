@@ -17,13 +17,13 @@ void ofx::patch::effect::BasiVerb::patch(){
     modAmountControl 	>> reverb.in_mod_amount();
     
     parameters.setName( "reverb" );
-    parameters.add( gain.set("reverb gain", -24, -48, 12 ) );
+    parameters.add( gain.set("reverb gain", -9, -48, 12 ) );
     parameters.add( timeControl.set("rt60", 3.33f, 0.05f, 20.0f ) );
-    parameters.add( densityControl.set("density", 0.85f, 0.0f, 1.0f ) );
-    parameters.add( dampingControl.set("damping", 0.25f, 0.0f, 1.0f ) );
-    parameters.add( hiCutControl.set("high cut freq", 8000, 3000, 20000 ) );
-    parameters.add( modFreqControl.set("mod speed (hz)", 0.5f, 0.25f, 8.25f));
-    parameters.add( modAmountControl.set("mod depth (ms)", 0.0f, 0.0f, 3.0f));
+    parameters.add( densityControl.set("density", 0.5f, 0.0f, 1.0f ) );
+    parameters.add( dampingControl.set("damping", 0.5f, 0.0f, 1.0f ) );
+    parameters.add( hiCutControl.set("high cut freq", 5000, 3000, 20000 ) );
+    parameters.add( modFreqControl.set("mod speed (hz)", 0.2f, 0.01f, 1.25f));
+    parameters.add( modAmountControl.set("mod depth (ms)", 0.8f, 0.0f, 3.0f));
 }
 
 ofParameterGroup & ofx::patch::effect::BasiVerb::label( string name ){

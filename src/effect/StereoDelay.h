@@ -34,6 +34,10 @@ public:
 private:
     void patch();
 
+    pdsp::LFOPhazor         phazor;
+    pdsp::CheapTri          LFO;
+    ofxPDSPValueMultiplier  modAmt;
+    ofxPDSPValue            speed;
 
     pdsp::DampedDelay ldelay;
     pdsp::DampedDelay rdelay;

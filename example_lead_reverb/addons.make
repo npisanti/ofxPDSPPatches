@@ -1,0 +1,8 @@
+ofxSIMDFloats
+ofxMidi
+ofxPDSP
+ofxGui
+ofxOsc
+ofxAudioFile
+ofxPDSPPatches
+ofxWatchFile

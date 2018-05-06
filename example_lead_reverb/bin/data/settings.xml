@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<gui>
+	<synth_gain>-6</synth_gain>
+	<attack>350</attack>
+	<reverb>
+		<reverb_gain>0</reverb_gain>
+		<rt60>3.33</rt60>
+		<density>0.5</density>
+		<damping>0.6</damping>
+		<high_cut_freq>5000</high_cut_freq>
+		<mod_speed__hz_>0.2</mod_speed__hz_>
+		<mod_depth__ms_>0.8</mod_depth__ms_>
+	</reverb>
+	<stereo_delay>
+		<input_gain>-15</input_gain>
+		<L_16th_time>4</L_16th_time>
+		<L_feedback>0.4</L_feedback>
+		<R_16th_time>6</R_16th_time>
+		<R_feedback>0.4</R_feedback>
+		<damping>0.5</damping>
+		<mod_speed__hz_>0.25</mod_speed__hz_>
+		<mod_depth__ms_>1.5</mod_depth__ms_>
+		<output_gain>0</output_gain>
+	</stereo_delay>
+</gui>
