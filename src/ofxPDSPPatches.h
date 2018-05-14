@@ -15,7 +15,7 @@
 #include "modulator/ClockedLFO.h"
 
 #include "sequencer/Euclidean.h"
-#include "sequencer/PTracker.h"
+#include "sequencer/Tracker.h"
 #include "sequencer/MarkovChain.h"
 #include "sequencer/Wolfram.h"
 

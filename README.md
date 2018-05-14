@@ -5,7 +5,7 @@ This is a set of high level classes that builds upon [ofxPDSP](https://github.co
 
 Included `ofx::patch::sequencer`:
 - `Euclidean` : euclidean rhythm generator
-- `PTracker` : file based tracker with probability for each step
+- `Tracker` : file based tracker with probability for each step 
 - `MarkovChain` : file based markov chain sequence
 - `Wolfram` : wolfram automata to rhymtm
    

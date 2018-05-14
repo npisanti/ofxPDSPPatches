@@ -10,10 +10,20 @@
 
 namespace ofx { namespace patch { namespace sequencer {
     
-class PTracker : public pdsp::Sequence{
+    
+
+class Tracker : public pdsp::Sequence{
+
+    class Step {
+    public:
+        Step();
+        
+        float value;
+        float chance;
+    };
 
 public:
-    PTracker();
+    Tracker();
 
     void load( std::string filepath, bool autoreload=true );
 
@@ -38,11 +48,13 @@ private:
 
     std::string path;
 
-    std::vector<std::vector<std::vector<float>>> values;
+    std::vector<std::vector<std::vector<Step>>> values;
     std::atomic<int> index;
     
     bool bLoaded;
     
 };
+
+typedef Tracker PTracker;
 
 }}} // end namespaces

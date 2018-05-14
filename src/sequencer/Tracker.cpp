@@ -1,8 +1,8 @@
 
-#include "PTracker.h"
+#include "Tracker.h"
 
 
-ofx::patch::sequencer::PTracker::PTracker() {
+ofx::patch::sequencer::Tracker::Tracker() {
     
     parameters.setName("ptracker");
     parameters.add( division.set("division", 16, 1, 32) );
@@ -20,9 +20,6 @@ ofx::patch::sequencer::PTracker::PTracker() {
         a.resize(128);
         for( auto & b : a ){
             b.resize(16);
-            for( auto & v : b){
-                v = -1.0f;
-            }
         }
     }
     //values.clear();
@@ -39,12 +36,15 @@ ofx::patch::sequencer::PTracker::PTracker() {
 
             begin( division, length);
                 if( !values.empty() && bLoaded ){
-                    for( size_t i=start; i<values[read].size() && i<(steps+start); ++i ) {
-                        if( values[read][i][0]>=1.0f || pdspChance(values[read][i][0]) ){
-                            for( size_t o=1; o<values[read][i].size() && i<(steps+start); ++o ) {
-                                if( values[read][i][o] >= 0.0f ) message( (double) (i-start), values[read][i][o], o-1); 
-                            }
-                        }
+                    for( int i=start; i<(int)values[read].size() && i<(steps+start); ++i ) {
+                        for( size_t o=0; o<values[read][i].size() && i<(steps+start); ++o ) {
+                            if( ( //values[read][i][o].chance>=1.0f || 
+                            
+                                    pdspChance(values[read][i][o].chance))
+                                 && values[read][i][o].value >= 0.0f ){
+                                message( (double) (i-start), values[read][i][o].value, o ); 
+                            } 
+                        }                        
                     }
                 }
             end();
@@ -55,7 +55,7 @@ ofx::patch::sequencer::PTracker::PTracker() {
     
 }
 
-void ofx::patch::sequencer::PTracker::load( std::string filepath, bool autoreload ) {
+void ofx::patch::sequencer::Tracker::load( std::string filepath, bool autoreload ) {
     path = filepath;
     auto v = ofSplitString(path, "/" );
     string name = v[v.size()-1];
@@ -65,7 +65,7 @@ void ofx::patch::sequencer::PTracker::load( std::string filepath, bool autoreloa
 #if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)    
     if( autoreload ){
         watcher.setCheckIntervalTimef( 0.03f );
-        watcher.addListener(this, &PTracker::onFileChange);
+        watcher.addListener(this, &Tracker::onFileChange);
         watcher.setTargetPath( filepath );        
     }else{
         loadFile();        
@@ -75,7 +75,7 @@ void ofx::patch::sequencer::PTracker::load( std::string filepath, bool autoreloa
 #endif
 }
 
-void ofx::patch::sequencer::PTracker::loadFile() {
+void ofx::patch::sequencer::Tracker::loadFile() {
     
 	//Load file placed at the given path
 	ofFile file( path );
@@ -89,7 +89,7 @@ void ofx::patch::sequencer::PTracker::loadFile() {
     ofBuffer buffer(file);
 
     int write = index + 1; // we operate on the next vector of the circular buffer
-    if (write>=values.size()){ write=0; }
+    if (write>=(int)values.size()){ write=0; }
     int trueLines = 0;
 
 	for (ofBuffer::Line it = buffer.getLines().begin(), end = buffer.getLines().end(); it != end; ++it) {
@@ -104,7 +104,8 @@ void ofx::patch::sequencer::PTracker::loadFile() {
     for( auto & a : values[write] ){
         a.resize(64);
         for( auto & val : a ){
-            val = -1.0f;
+            val.value = -1.0f;
+            val.chance = 1.0f;
         }
     }
 
@@ -116,37 +117,50 @@ void ofx::patch::sequencer::PTracker::loadFile() {
 
         if( line[0] != '#' && line.length()>1 ){
             int o=0;
-            string toParse = "";
-            bool parsing = false;            
+            
+            string parsedValue = "";
+            bool bParsingValue = false;            
+
+            string parsedChance = "";
+            bool bParsingChance = false;            
 
             for( size_t l=0; l<line.length(); ++l ){
                 switch( line[l] ){
                     case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '.': 
-                        toParse += (char) line[l];
-                        if(!parsing) parsing = true;
-                    break;
-                    
-                    case ',': 
-                        toParse += ".";
-                        if(!parsing) parsing = true;
-                    break;
-                    
-                    case '-': case 'o': case '~': case '|': 
-                        if( o==0){
-                            // 100% probability
-                            values[write][i][o] = 1.0f;
+                        if( bParsingChance ){
+                            parsedChance += (char) line[l];
                         }else{
-                            values[write][i][o] = -1.0f;
+                            parsedValue += (char) line[l];
+                            if(!bParsingValue) bParsingValue = true;                            
                         }
+                    break;
+                    
+                    case 'x':
+                       if(bParsingValue){
+                            values[write][i][o].value = ofToFloat( parsedValue );
+                            parsedValue = "";                            
+                            bParsingValue = false;
+                            parsedChance = "";
+                            bParsingChance = true;
+                        }
+                    break;
+                    
+                    case '-': case 'o': case '~': case '|': case '_': 
+                        values[write][i][o].value = -1.0f;
                         o++;
                     break;
                     
                     default:
-                        if(parsing){
-                            values[write][i][o] = ofToFloat( toParse );
+                        if(bParsingValue){
+                            values[write][i][o].value = ofToFloat( parsedValue );
                             o++;
-                            toParse = "";
-                            parsing = false;
+                            parsedValue = "";
+                            bParsingValue = false;
+                        }
+                        if(bParsingChance){
+                            values[write][i][o].chance = ofToFloat( parsedChance );
+                            o++;
+                            bParsingChance = false;
                         }
                     break;
                 }
@@ -159,4 +173,8 @@ void ofx::patch::sequencer::PTracker::loadFile() {
     bLoaded = true;
 }
 
+ofx::patch::sequencer::Tracker::Step::Step(){
+    value = -1.0f;
+    chance = 1.0f; // 1.0f = 100%
+}
 

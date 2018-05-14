@@ -26,7 +26,14 @@ void ofApp::setup(){
     }
     
     
-    // -------------------GRAPHIC SETUP--------------
+    // -------------GUI & GRAPHIC SETUP--------------
+    gui.setup("panel", "settings.xml", 20, 20 );
+    gui.add( tracker.parameters );
+    for( size_t i=0; i<voices.size(); ++i){
+        gui.add( voices[i].label( "perc "+ofToString(i) ) );
+    }
+    gui.loadFromFile("settings.xml");
+    
     ofBackground(0);
     ofSetFrameRate(30);
 
@@ -34,14 +41,6 @@ void ofApp::setup(){
     engine.listDevices();
     engine.setDeviceID(0); // REMEMBER TO SET THIS AT THE RIGHT INDEX!!!!
     engine.setup( 44100, 512, 3); 
-    
-    gui.setup("panel");
-    
-    gui.add( tracker.parameters );
-    for( size_t i=0; i<voices.size(); ++i){
-        gui.add( voices[i].label( "perc "+ofToString(i) ) );
-    }
-    gui.setPosition( ofGetWidth()-220, 20);
     
 }
 

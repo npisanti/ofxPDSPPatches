@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
         
         vector<ofx::patch::synth::SinePercussion> voices;
 
-        ofx::patch::sequencer::PTracker tracker;
+        ofx::patch::sequencer::Tracker tracker;
     
         ofxPanel gui;
     
