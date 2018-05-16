@@ -20,9 +20,13 @@ ofx::patch::sequencer::Tracker::Tracker() {
         a.resize(128);
         for( auto & b : a ){
             b.resize(16);
+            for( auto & v : b ){
+                v.value = -1.0f;
+                v.chance = 1.0f;
+            }
         }
     }
-    //values.clear();
+    
     index = 0;
 
     code = [&] () noexcept {
@@ -38,9 +42,7 @@ ofx::patch::sequencer::Tracker::Tracker() {
                 if( !values.empty() && bLoaded ){
                     for( int i=start; i<(int)values[read].size() && i<(steps+start); ++i ) {
                         for( size_t o=0; o<values[read][i].size() && i<(steps+start); ++o ) {
-                            if( ( //values[read][i][o].chance>=1.0f || 
-                            
-                                    pdspChance(values[read][i][o].chance))
+                            if( ( values[read][i][o].chance>=1.0f || pdspChance(values[read][i][o].chance))
                                  && values[read][i][o].value >= 0.0f ){
                                 message( (double) (i-start), values[read][i][o].value, o ); 
                             } 
@@ -172,9 +174,3 @@ void ofx::patch::sequencer::Tracker::loadFile() {
     index = write; // everything done, update the index
     bLoaded = true;
 }
-
-ofx::patch::sequencer::Tracker::Step::Step(){
-    value = -1.0f;
-    chance = 1.0f; // 1.0f = 100%
-}
-

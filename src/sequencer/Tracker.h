@@ -14,10 +14,7 @@ namespace ofx { namespace patch { namespace sequencer {
 
 class Tracker : public pdsp::Sequence{
 
-    class Step {
-    public:
-        Step();
-        
+    struct Step {
         float value;
         float chance;
     };
