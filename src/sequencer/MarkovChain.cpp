@@ -46,7 +46,7 @@ ofx::patch::sequencer::MarkovChain::MarkovChain(){
     parameters.add( this->steps.set( "steps", 16, 0, 64 ));
     parameters.add( this->division.set( "division", 16, 0, 32 ));
     parameters.add( this->autogenerate.set( "autogenerate", false ) );
-    parameters.add( this->repeat.set( "bars", 1, 1, 16) );
+    parameters.add( this->repeat.set( "ag counter", 1, 1, 16) );
     parameters.add( this->regenerate.set( "regenerate", true) );
     parameters.add( this->active.set( "active", true) );
     this->div = division ;
