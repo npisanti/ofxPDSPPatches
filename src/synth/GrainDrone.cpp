@@ -19,6 +19,14 @@ void ofx::patch::synth::GrainDrone::addSample( util::SampleControl & sample ) {
     selectSampleControl.set("select sample", 0, 0, samples.size()-1 );
 }
 
+    
+void ofx::patch::synth::GrainDrone::sample( int select ) {
+    selectSampleControl.getOFParameterInt() = select;
+}
+    
+void ofx::patch::synth::GrainDrone::pitch( int newpitch ) {
+    pitchControl.getOFParameterInt() = newpitch;
+}
 
 ofParameterGroup & ofx::patch::synth::GrainDrone::setup( int w, int h, std::string name, bool guicontrol ){
 

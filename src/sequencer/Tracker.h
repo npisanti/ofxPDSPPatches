@@ -21,6 +21,7 @@ class Tracker : public pdsp::Sequence{
 
 public:
     Tracker();
+    Tracker(  const Tracker & other ){ ofLogError()<<"do not copy around sequencer::Tracker"; }
 
     void load( std::string filepath, bool autoreload=true );
 

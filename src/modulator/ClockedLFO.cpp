@@ -59,7 +59,7 @@ void ofx::patch::modulator::ClockedLFO::recalculateDivision( int & value ) {
 
 void ofx::patch::modulator::ClockedLFO::setShape( int value ) {
     if( value >=0 && value < 5){
-        modeControl.getOFParameterInt();        
+        modeControl.getOFParameterInt() = value;        
     }else{
         ofLogError()<<"[clocked lfo] wrong index for shape";
     }
@@ -67,4 +67,12 @@ void ofx::patch::modulator::ClockedLFO::setShape( int value ) {
 
 void ofx::patch::modulator::ClockedLFO::setPulse( int value ) {
     pulse = value;
+}
+
+void ofx::patch::modulator::ClockedLFO::setDivide( int value ) {
+    divide = value;
+}
+
+void ofx::patch::modulator::ClockedLFO::setAmount( float value  ) {
+    multiplier.getOFParameterFloat() = value;
 }

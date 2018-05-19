@@ -21,6 +21,8 @@ public:
 
     void setShape( int value );
     void setPulse( int value );
+    void setDivide( int value );
+    void setAmount( float value );
     
 private:    
     void patch();
@@ -29,7 +31,6 @@ private:
     pdsp::ClockedLFO    lfo;
     ofParameter<int>    pulse;
     ofParameter<int>    divide;
-    ofxPDSPValue        amountControl;
     ofxPDSPValue        phaseControl;
     ofxPDSPValue        modeControl;
 

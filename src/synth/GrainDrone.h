@@ -36,6 +36,10 @@ public:
     ofxPDSPValue            resonatorsFBControl;
     
     void smoothing( float ms );
+    
+    void sample( int select ); // select sample
+    void pitch( int newpitch ); // set pitch
+   
    
     ofParameterGroup & label( std::string name );
     
