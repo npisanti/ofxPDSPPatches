@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "dynamics/Brickwall.h"
+#include "dynamics/Compressor.h"
 
 #include "effect/StereoDelay.h"
 #include "effect/BasiVerb.h"

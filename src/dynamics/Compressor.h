@@ -1,0 +1,61 @@
+
+#pragma once
+
+#include "ofMain.h"
+
+#include "ofxPDSP.h"
+
+
+namespace ofx { namespace patch { namespace dynamics {
+    
+class Compressor : public pdsp::Patchable {
+
+public:    
+    Compressor() { patch(); }
+    Compressor( const Compressor & other ) { patch (); }
+    
+    ofParameterGroup parameters;
+
+    void peak(){ comp.peak(); }
+    void RMS( float window ){ comp.RMS(window); }
+
+    float meter_GR() const;
+
+    pdsp::Patchable & in_0();
+    pdsp::Patchable & in_1();
+    pdsp::Patchable & out_0();
+    pdsp::Patchable & out_1();
+    pdsp::Patchable & in_L();
+    pdsp::Patchable & in_R();
+    pdsp::Patchable & out_L();
+    pdsp::Patchable & out_R();
+
+    ofParameterGroup & label( std::string name );
+
+    void enableScope( ofxPDSPEngine & engine );
+    void drawScope( int x, int y, int w, int h );
+    void drawMeter( int x, int y, int w, int h );
+
+    void draw( int x, int y, int w, int h );
+
+private:    
+    void patch();
+        
+    pdsp::Compressor comp;
+    
+    pdsp::PatchNode input0;
+    
+    ofxPDSPStereoFader makeup;
+    
+    ofxPDSPValue    attackControl;
+    ofxPDSPValue    releaseControl;
+    ofxPDSPValue    thresholdControl;
+    ofxPDSPValue    kneeControl;
+    ofxPDSPValue    ratioControl;
+    
+    float threshold(){ return thresholdControl.getOFParameterInt(); }
+    
+    ofxPDSPScope                scope;
+};
+    
+}}}

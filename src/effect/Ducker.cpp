@@ -9,8 +9,8 @@ void ofx::patch::effect::Ducker::patch(){
     addModuleInput( "0", ducker.in_0() );
     addModuleInput( "1", ducker.in_1() );
     addModuleInput( "trig", ducker.in_trig() );
-    addModuleOutput( "0", ducker.in_0() );
-    addModuleOutput( "1", ducker.in_1() );
+    addModuleOutput( "0", ducker.out_0() );
+    addModuleOutput( "1", ducker.out_1() );
     
     attackControl  >> ducker.in_attack();
     holdControl    >> ducker.in_hold();
