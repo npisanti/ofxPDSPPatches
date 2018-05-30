@@ -8,14 +8,8 @@ void ofx::patch::dynamics::Brickwall::patch(){
 
     addModuleInput( "0", input0 );
     addModuleInput( "1", comp.in_1() );
-    
-#ifdef __ARM_ARCH
-    addModuleOutput( "0", clip0 );
-    addModuleOutput( "1", clip1 );
-#else
     addModuleOutput( "0", downsampler0 );
     addModuleOutput( "1", downsampler1 );
-#endif
 
     comp.digital( true );
     
@@ -24,18 +18,12 @@ void ofx::patch::dynamics::Brickwall::patch(){
     comp.out_0() >> makeup.in_0(); 
     comp.out_1() >> makeup.in_1();
 
-
-#ifdef __ARM_ARCH
-    makeup.out_0() >> clip0;
-    makeup.out_1() >> clip1;
-#else
     makeup.out_0() >> upsampler0;
     makeup.out_1() >> upsampler1;
     clip0.setOversampleLevel(2);
     clip1.setOversampleLevel(2);
     upsampler0 >> clip0 >> downsampler0;
     upsampler1 >> clip1 >> downsampler1;   
-#endif
 
     attackControl       >> comp.in_attack();
     releaseControl      >> comp.in_release();
