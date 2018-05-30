@@ -13,8 +13,8 @@ void ofx::patch::dynamics::Brickwall::patch(){
     addModuleOutput( "0", clip0 );
     addModuleOutput( "1", clip1 );
 #else
-    addModuleOutput( "0", clip0 );
-    addModuleOutput( "1", clip1 );
+    addModuleOutput( "0", downsampler0 );
+    addModuleOutput( "1", downsampler1 );
 #endif
 
     comp.digital( true );
