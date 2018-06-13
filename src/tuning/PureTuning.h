@@ -24,9 +24,9 @@ private:
         void ratioChange( int & value ) {
             double ratio = (double) (numerator*octave) / (double) denominator;
             double bp = (double) (*basePitch);
-            double freq = p2f(bp);
+            double freq = pdsp::p2f(bp);
             freq *= ratio;
-            pitch.setv( f2p(freq) );
+            pitch.setv( pdsp::f2p(freq) );
         }
         
         void setBasePitch( ofParameter<int> & bp) {
