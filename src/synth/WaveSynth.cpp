@@ -17,9 +17,9 @@ ofParameterGroup & ofx::patch::synth::WaveSynth::setup( int numVoices, float spr
             voices[i] >> gain.in_0();
             voices[i] >> gain.in_1();
         }else{
-            float spreadamt = pdspSpread( i, numVoices, spread );
-            voices[i] * panL(spreadamt )>> gain.in_0();
-            voices[i] * panR(spreadamt )>> gain.in_1();
+            float spreadamt = pdsp::spread( i, numVoices, spread );
+            voices[i] * pdsp::panL(spreadamt )>> gain.in_0();
+            voices[i] * pdsp::panR(spreadamt )>> gain.in_1();
         }
     }
 
@@ -83,7 +83,7 @@ void ofx::patch::synth::WaveSynth::Voice::setup( WaveSynth & m ){
         
         
     0.2f    >> phazorFree;
-    0.05f  >> randomSlew.in_cutoff();
+    0.05f  >> randomSlew.in_freq();
                                        m.drift >> driftAmt.in_mod();        
     phazorFree.out_trig() >> rnd >> randomSlew >> driftAmt;
                                                   driftAmt >> oscillator.in_pitch();
