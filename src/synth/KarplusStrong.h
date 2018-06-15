@@ -59,21 +59,21 @@ private: // -------------------------------------------------------------------
     pdsp::Amp               ampL;
     pdsp::Amp               ampR;
     
-    ofxPDSPValue            masterFader;
+    pdsp::Parameter         masterFader;
     pdsp::DBtoLin           dBtoLin;
 
-    ofxPDSPValue     fbControl;
-    ofxPDSPValue     dampingControl;
+    pdsp::Parameter     fbControl;
+    pdsp::Parameter     dampingControl;
     
-    ofxPDSPValue     pluckAttackControl;
-    ofxPDSPValue     pluckDecayControl;
+    pdsp::Parameter     pluckAttackControl;
+    pdsp::Parameter     pluckDecayControl;
     
-    ofxPDSPValue     filterModeControl;
-    ofxPDSPValue     filterCutoffControl;
-    ofxPDSPValue     filterResoControl;
-    ofxPDSPValue     filterModControl;
-    ofxPDSPValue     filterModDecayControl;
-    ofxPDSPValue     filterModVeloControl;
+    pdsp::Parameter     filterModeControl;
+    pdsp::Parameter     filterCutoffControl;
+    pdsp::Parameter     filterResoControl;
+    pdsp::Parameter     filterModControl;
+    pdsp::Parameter     filterModDecayControl;
+    pdsp::Parameter     filterModVeloControl;
 
 };
 

@@ -8,7 +8,7 @@
 #include "ofxWatchFile.h"
 #endif 
 
-namespace ofx { namespace patch { namespace sequencer  {
+namespace ofx { namespace patch { namespace sequence  {
     
 class MarkovChain : public pdsp::Sequence {
     

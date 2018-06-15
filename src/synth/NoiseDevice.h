@@ -40,29 +40,29 @@ private:
     pdsp::Amp               amp1;
     pdsp::PatchNode         trigger;
     
-    pdsp::VAFilter          filter;
-    ofxPDSPValue            filterTypeControl;
-    ofxPDSPValue            filterCutoffControl;
-    ofxPDSPValue            filterResoControl;
+    pdsp::VAFilter             filter;
+    pdsp::Parameter            filterTypeControl;
+    pdsp::Parameter            filterCutoffControl;
+    pdsp::Parameter            filterResoControl;
     
-    ofxPDSPValue            noisePitchControl;
-    ofxPDSPValue            noiseDecimateControl;
+    pdsp::Parameter            noisePitchControl;
+    pdsp::Parameter            noiseDecimateControl;
     
-    ofxPDSPValue            envAttackControl;
-    ofxPDSPValue            envHoldControl;
-    ofxPDSPValue            envReleaseControl;
+    pdsp::Parameter            envAttackControl;
+    pdsp::Parameter            envHoldControl;
+    pdsp::Parameter            envReleaseControl;
     
-    ofxPDSPValue            modEnvVeloControl;
-    ofxPDSPValue            modEnvAttackControl;
-    ofxPDSPValue            modEnvReleaseControl;
-    ofxPDSPValueMultiplier  modFilterAmt;
-    ofxPDSPValueMultiplier  modPitchAmt;
-    ofxPDSPValueMultiplier  modDecimateAmt;
+    pdsp::Parameter            modEnvVeloControl;
+    pdsp::Parameter            modEnvAttackControl;
+    pdsp::Parameter            modEnvReleaseControl;
+    pdsp::ParameterAmp         modFilterAmt;
+    pdsp::ParameterAmp         modPitchAmt;
+    pdsp::ParameterAmp         modDecimateAmt;
 
 
-    ofxPDSPValue            bitsControl;
-    ofxPDSPValue            randomControl;
-    ofxPDSPValue            randomCutoffControl;
+    pdsp::Parameter            bitsControl;
+    pdsp::Parameter            randomControl;
+    pdsp::Parameter            randomCutoffControl;
     pdsp::TriggeredRandom   random0;    
     pdsp::TriggeredRandom   random1;    
     pdsp::TriggeredRandom   random2;    
@@ -74,7 +74,7 @@ private:
     pdsp::Amp           gain0;
     pdsp::Amp           gain1;
     pdsp::DBtoLin       dBtoLin;
-    ofxPDSPValue        gainControl;  
+    pdsp::Parameter     gainControl;  
 
 };
     

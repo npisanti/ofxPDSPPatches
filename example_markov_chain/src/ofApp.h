@@ -26,13 +26,13 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
         // pdsp modules
-        ofxPDSPEngine   engine;
+        pdsp::Engine   engine;
         
         ofx::patch::synth::SinePercussion zap;
         ofx::patch::synth::NoiseDevice noise;
         ofx::patch::synth::NoiseDevice click;
 
-        ofx::patch::sequencer::MarkovChain mc;
+        ofx::patch::sequence::MarkovChain mc;
     
         ofxPanel gui;
     

@@ -31,13 +31,13 @@ private:
     pdsp::ClockedLFO    lfo;
     ofParameter<int>    pulse;
     ofParameter<int>    divide;
-    ofxPDSPValue        phaseControl;
-    ofxPDSPValue        modeControl;
+    pdsp::Parameter     phaseControl;
+    pdsp::Parameter     modeControl;
 
     pdsp::Switch        lfoSwitch;
-    ofxPDSPValue        divisionControl;
+    pdsp::Parameter     divisionControl;
     
-    ofxPDSPValueMultiplier multiplier;
+    pdsp::ParameterAmp multiplier;
     
 };
     

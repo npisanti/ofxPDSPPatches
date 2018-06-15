@@ -58,17 +58,17 @@ public:
 
 private: // --------------------------------------------------
 
-    ofxPDSPStereoFader gain;
+    pdsp::ParameterGain gain;
 
-    ofxPDSPValue     cutoff_ctrl;
-    ofxPDSPValue     reso_ctrl;
-    ofxPDSPValue     filter_mode_ctrl;
+    pdsp::Parameter     cutoff_ctrl;
+    pdsp::Parameter     reso_ctrl;
+    pdsp::Parameter     filter_mode_ctrl;
 
-    ofxPDSPValue     env_attack_ctrl;
-    ofxPDSPValue     env_decay_ctrl;
-    ofxPDSPValue     env_sustain_ctrl;
-    ofxPDSPValue     env_release_ctrl;
-    ofxPDSPValue     env_filter_ctrl;
+    pdsp::Parameter     env_attack_ctrl;
+    pdsp::Parameter     env_decay_ctrl;
+    pdsp::Parameter     env_sustain_ctrl;
+    pdsp::Parameter     env_release_ctrl;
+    pdsp::Parameter     env_filter_ctrl;
 
 };
 

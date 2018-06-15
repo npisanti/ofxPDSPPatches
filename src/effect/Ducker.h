@@ -33,11 +33,11 @@ private:
         
     pdsp::Ducker ducker;
     
-    ofxPDSPValue    attackControl;
-    ofxPDSPValue    holdControl;
-    ofxPDSPValue    releaseControl;
-    ofxPDSPValue    duckingControl;
-    ofxPDSPValue    veloControl;
+    pdsp::Parameter    attackControl;
+    pdsp::Parameter    holdControl;
+    pdsp::Parameter    releaseControl;
+    pdsp::Parameter    duckingControl;
+    pdsp::Parameter    veloControl;
     
 };
     

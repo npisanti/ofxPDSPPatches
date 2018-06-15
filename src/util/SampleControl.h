@@ -18,7 +18,7 @@ public:
     
     bool normalize;
     
-    ofxSampleBufferPlotter  graphics;
+    pdsp::SampleBufferPlotter  graphics;
     
     bool loading() const;
     

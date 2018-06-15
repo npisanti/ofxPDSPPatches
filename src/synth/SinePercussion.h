@@ -35,23 +35,23 @@ private:
     pdsp::Amp           amp;
     pdsp::Amp           pModAmt;
 
-    ofxPDSPValue        fbModControl;
-    ofxPDSPValue        fbControl;
-    pdsp::Amp           fbModAmt;
+    pdsp::Parameter        fbModControl;
+    pdsp::Parameter        fbControl;
+    pdsp::Amp              fbModAmt;
     
-    ofxPDSPValue        pitchControl;    
-    ofxPDSPValue        veloToEnv;
-    ofxPDSPValue        pEnvAmtControl;
-    ofxPDSPValue        pEnvAttackControl;
-    ofxPDSPValue        pEnvReleaseControl;
+    pdsp::Parameter        pitchControl;    
+    pdsp::Parameter        veloToEnv;
+    pdsp::Parameter        pEnvAmtControl;
+    pdsp::Parameter        pEnvAttackControl;
+    pdsp::Parameter        pEnvReleaseControl;
 
-    ofxPDSPValue        envAttackControl;
-    ofxPDSPValue        envHoldControl;
-    ofxPDSPValue        envReleaseControl;
+    pdsp::Parameter        envAttackControl;
+    pdsp::Parameter        envHoldControl;
+    pdsp::Parameter        envReleaseControl;
 
-    pdsp::Amp           gain;
-    pdsp::DBtoLin       dBtoLin;
-    ofxPDSPValue        gainControl;  
+    pdsp::Amp              gain;
+    pdsp::DBtoLin          dBtoLin;
+    pdsp::Parameter        gainControl;  
 
 };
 

@@ -16,10 +16,10 @@
 
 #include "modulator/ClockedLFO.h"
 
-#include "sequencer/Euclidean.h"
-#include "sequencer/Tracker.h"
-#include "sequencer/MarkovChain.h"
-#include "sequencer/Wolfram.h"
+#include "sequence/Euclidean.h"
+#include "sequence/Tracker.h"
+#include "sequence/MarkovChain.h"
+#include "sequence/Wolfram.h"
 
 #include "synth/KarplusStrong.h"
 #include "synth/SinePercussion.h"

@@ -33,7 +33,6 @@ private:
     void loadButtonCall( bool & value );
     void sampleChangedCall( std::string & value );
     void loadSample( std::string path );
-    
 
 
     pdsp::PatchNode     triggers;
@@ -47,7 +46,7 @@ private:
     pdsp::Amp           fader0;
     pdsp::Amp           fader1;
     pdsp::DBtoLin       dBtoLin;
-    ofxPDSPValue        faderControl;    
+    pdsp::Parameter     faderControl;    
     
     pdsp::OnePole       lp0a;
     pdsp::OnePole       lp0b;
@@ -56,24 +55,24 @@ private:
     
     pdsp::TriggeredRandom   drift;
     pdsp::Amp               driftAmt;
-    ofxPDSPValue            driftControl;
+    pdsp::Parameter         driftControl;
     
-    pdsp::PatchNode         pitchNode;
-    ofxPDSPValue            pitchControl;
+    pdsp::PatchNode     pitchNode;
+    pdsp::Parameter     pitchControl;
         
-    ofxPDSPValue        startControl;
-    ofxPDSPValue        startModControl;
+    pdsp::Parameter     startControl;
+    pdsp::Parameter     startModControl;
         
-    ofxPDSPValue        attackControl;
-    ofxPDSPValue        holdControl;
-    ofxPDSPValue        releaseControl;
+    pdsp::Parameter     attackControl;
+    pdsp::Parameter     holdControl;
+    pdsp::Parameter     releaseControl;
     
-    ofxPDSPValue        envFilterControl;
+    pdsp::Parameter     envFilterControl;
     pdsp::Amp           envFilterAmt;
-    ofxPDSPValue        filterControl;
+    pdsp::Parameter     filterControl;
     pdsp::PitchToFreq   p2f;
     
-    ofxPDSPValue        envDynControl;
+    pdsp::Parameter        envDynControl;
 
     pdsp::SampleBuffer  sample;    
     ofParameter<bool>   loadButton;

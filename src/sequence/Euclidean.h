@@ -4,7 +4,7 @@
 #include "ofMain.h"
 #include "ofxPDSP.h"
 
-namespace ofx{ namespace patch { namespace sequencer {
+namespace ofx{ namespace patch { namespace sequence {
 
 class Euclidean : public pdsp::Sequence {
     

@@ -25,13 +25,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         
-        ofxPDSPEngine   engine;
+        pdsp::Engine   engine;
         
         ofx::patch::effect::Chorus      chorus;
         ofx::patch::synth::WaveSynth    wavesynth;
         ofx::patch::modulator::ClockedLFO lfo;
                 
-        ofxPDSPComputerKeyboard     keyboard;
+        pdsp:: ComputerKeyboard     keyboard;
         ofxPanel                    gui;
       
 };

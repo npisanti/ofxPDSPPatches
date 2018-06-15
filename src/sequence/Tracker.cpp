@@ -2,7 +2,7 @@
 #include "Tracker.h"
 
 
-ofx::patch::sequencer::Tracker::Tracker() {
+ofx::patch::sequence::Tracker::Tracker() {
     
     parameters.setName("ptracker");
     parameters.add( division.set("division", 16, 1, 32) );
@@ -42,7 +42,7 @@ ofx::patch::sequencer::Tracker::Tracker() {
                 if( !values.empty() && bLoaded ){
                     for( int i=start; i<(int)values[read].size() && i<(steps+start); ++i ) {
                         for( size_t o=0; o<values[read][i].size() && i<(steps+start); ++o ) {
-                            if( ( values[read][i][o].chance>=1.0f || pdspChance(values[read][i][o].chance))
+                            if( ( values[read][i][o].chance>=1.0f || pdsp::chance(values[read][i][o].chance))
                                  && values[read][i][o].value >= 0.0f ){
                                 message( (double) (i-start), values[read][i][o].value, o ); 
                             } 
@@ -57,7 +57,7 @@ ofx::patch::sequencer::Tracker::Tracker() {
     
 }
 
-void ofx::patch::sequencer::Tracker::load( std::string filepath, bool autoreload ) {
+void ofx::patch::sequence::Tracker::load( std::string filepath, bool autoreload ) {
     path = filepath;
     auto v = ofSplitString(path, "/" );
     string name = v[v.size()-1];
@@ -77,7 +77,7 @@ void ofx::patch::sequencer::Tracker::load( std::string filepath, bool autoreload
 #endif
 }
 
-void ofx::patch::sequencer::Tracker::loadFile() {
+void ofx::patch::sequence::Tracker::loadFile() {
     
 	//Load file placed at the given path
 	ofFile file( path );

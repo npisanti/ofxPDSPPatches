@@ -37,7 +37,7 @@ private:
         ofParameter<int>    numerator;
         ofParameter<int>    denominator;
         ofParameter<int>    octave;
-        ofxPDSPValue        pitch;
+        pdsp::Parameter     pitch;
         
     };
 

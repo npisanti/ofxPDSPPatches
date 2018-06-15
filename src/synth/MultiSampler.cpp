@@ -37,10 +37,10 @@ void ofx::patch::synth::MultiSampler::patch (){
     faderControl >> dBtoLin  >> fader0.in_mod();
                     dBtoLin  >> fader1.in_mod();
     
-    filterControl >> p2f >> lp0a.in_cutoff();
-                     p2f >> lp0b.in_cutoff();
-                     p2f >> lp1a.in_cutoff();
-                     p2f >> lp1b.in_cutoff();
+    filterControl >> p2f >> lp0a.in_freq();
+                     p2f >> lp0b.in_freq();
+                     p2f >> lp1a.in_freq();
+                     p2f >> lp1b.in_freq();
     envFilterAmt >>  p2f;
     
     triggers >>fEnv >> envFilterAmt;

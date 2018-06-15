@@ -12,8 +12,8 @@ void ofApp::setup(){
     
     wavesynth.wavetable.setup( 512, 128 ); // 512 samples, 128 max partials
 
-    wavesynth.wavetable.addSawWave( highestPartial(60.0f) ); // this saw wave won't alias before C3=60
-    wavesynth.wavetable.addSquareWave( highestPartial(72.0f) ); // this saw wave won't alias before C4=72
+    wavesynth.wavetable.addSawWave( pdsp::highestPartial(60.0f) ); // this saw wave won't alias before C3=60
+    wavesynth.wavetable.addSquareWave( pdsp::highestPartial(72.0f) ); // this square wave won't alias before C4=72
     wavesynth.wavetable.addTriangleWave( 64 ); // Triangle wave with 64 partials
     wavesynth.wavetable.addSineWave();
     wavesynth.wavetable.addAdditiveWave ( { 1.0f, 1.0f, 1.0f, 1.0f } ); 

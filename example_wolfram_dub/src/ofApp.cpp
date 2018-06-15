@@ -41,31 +41,31 @@ void ofApp::setup(){
         if(masterplan.counter()==0 && masterplanRandomize){
         
             wolframSeq.regenerate = true; // generate the sequence again
-            wolframSeq.activeOuts = pdspDice( 2, 5 );
-            wolframSeq.threshold = pdspDice(2, 6);
-            wolframSeq.seedsDensity = 0.2f + pdspURan()*0.4f;
-            dub.lDelayTimeControl.getOFParameterInt() = pdspDice(1,9);
-            dub.rDelayTimeControl.getOFParameterInt()  = pdspDice(1,9);
-            dub.lFeedbackControl.getOFParameterFloat() = 0.2f + pdspURan()*0.5f;
-            dub.rFeedbackControl.getOFParameterFloat() = 0.2f + pdspURan()*0.5f;
+            wolframSeq.activeOuts = pdsp::dice( 2, 5 );
+            wolframSeq.threshold = pdsp::dice(2, 6);
+            wolframSeq.seedsDensity = 0.2f + pdsp::urand()*0.4f;
+            dub.lDelayTimeControl.getOFParameterInt() = pdsp::dice(1,9);
+            dub.rDelayTimeControl.getOFParameterInt()  = pdsp::dice(1,9);
+            dub.lFeedbackControl.getOFParameterFloat() = 0.2f + pdsp::urand()*0.5f;
+            dub.rFeedbackControl.getOFParameterFloat() = 0.2f + pdsp::urand()*0.5f;
             
-            switch( pdspDice(6) ){
+            switch( pdsp::dice(6) ){
                 case 0:
                     wolframSeq.rule = 90;
                     wolframSeq.reverse = false;
-                    wolframSeq.threshold = pdspDice(0, 4);
+                    wolframSeq.threshold = pdsp::dice(0, 4);
                     break;
                 case 1:
                     wolframSeq.rule = 124;
-                    wolframSeq.reverse = pdspChance(0.5f);
+                    wolframSeq.reverse = pdsp::chance(0.5f);
                     break;
                 case 2:
                     wolframSeq.rule = 126;
-                    wolframSeq.reverse = pdspChance(0.5f);
+                    wolframSeq.reverse = pdsp::chance(0.5f);
                     break;
                 case 3:
                     wolframSeq.rule = 150;
-                    wolframSeq.reverse = pdspChance(0.5f);
+                    wolframSeq.reverse = pdsp::chance(0.5f);
                     break;
                 case 4:
                     wolframSeq.rule = 60;
@@ -88,8 +88,6 @@ void ofApp::setup(){
     
     // ----------- PATCHING -----------
     
-    // loads reverb impulse response
-
     zaps.resize(ZAPS_NUMBER);
     scopes.resize(ZAPS_NUMBER + 2);
     
@@ -110,12 +108,9 @@ void ofApp::setup(){
                   dub.out("1") * dB(12.0f) >> scopes[ZAPS_NUMBER+1] >> engine.blackhole();
     
     // patch the reverb to an high pass filter and then to the engine
-    // ( deactivated on rPi as the processor is too slow for IR convolution using FFT )
-#ifndef __ARM_ARCH
     reverb.out_L() >> revCut.in_0(); revCut.out_0() >> engine.audio_out(0);
     reverb.out_R() >> revCut.in_1(); revCut.out_1() >> engine.audio_out(1);
     100.0f >> revCut.in_freq(); // 100hz, we cut the reverb muddy low end 
-#endif
 
     // ------------ GUI ------------
     gui.setup("", "settings.xml", ofGetWidth()-220, 40);

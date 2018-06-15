@@ -35,8 +35,8 @@ private:
         
     pdsp::FMOperator        sine;
     
-    ofxPDSPValue            pitchControl;
-    ofxPDSPValue            wetControl;      
+    pdsp::Parameter            pitchControl;
+    pdsp::Parameter            wetControl;      
     
     pdsp::Amp               rm0;
     pdsp::Amp               rm1;

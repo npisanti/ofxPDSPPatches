@@ -44,7 +44,7 @@ private:
     pdsp::Amp           fader0;
     pdsp::Amp           fader1;
     pdsp::DBtoLin       dBtoLin;
-    ofxPDSPValue        faderControl;    
+    pdsp::Parameter     faderControl;    
     
     pdsp::OnePole       lp0a;
     pdsp::OnePole       lp0b;
@@ -53,22 +53,22 @@ private:
     
     pdsp::TriggeredRandom   drift;
     pdsp::Amp               driftAmt;
-    ofxPDSPValue            driftControl;
+    pdsp::Parameter         driftControl;
     
     pdsp::PatchNode         pitchNode;
-    ofxPDSPValue            pitchControl;
+    pdsp::Parameter         pitchControl;
         
         
-    ofxPDSPValue        attackControl;
-    ofxPDSPValue        holdControl;
-    ofxPDSPValue        releaseControl;
+    pdsp::Parameter        attackControl;
+    pdsp::Parameter        holdControl;
+    pdsp::Parameter        releaseControl;
     
-    ofxPDSPValue        envFilterControl;
-    pdsp::Amp           envFilterAmt;
-    ofxPDSPValue        filterControl;
-    pdsp::PitchToFreq   p2f;
+    pdsp::Parameter        envFilterControl;
+    pdsp::Amp              envFilterAmt;
+    pdsp::Parameter        filterControl;
+    pdsp::PitchToFreq      p2f;
     
-    ofxPDSPValue        envDynControl;
+    pdsp::Parameter        envDynControl;
     
 };   
     

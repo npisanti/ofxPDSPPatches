@@ -64,7 +64,7 @@ void ofApp::draw(){
     
     ofSetColor(255, 85, 85);
     
-    ofDrawBitmapString("for changing the sequence\nedit the markov.chain file", 20, ofGetHeight()-40 );  
+    ofDrawBitmapString("for changing the sequence\nedit bin/data/mc.chain", 20, ofGetHeight()-40 );  
                         
     mc.draw( 20, ofGetHeight()-80);
 }

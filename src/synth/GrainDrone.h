@@ -28,12 +28,12 @@ public:
     pdsp::GrainCloud        cloud;  
     ofParameterGroup        parameters;
 
-    std::vector<ofxPDSPValue>    resonators_control;    
-    ofxPDSPValue            dry_control;
-    ofxPDSPValue            positionControl;
-    ofxPDSPValue            densityControl;
-    ofxPDSPValue            fader;        
-    ofxPDSPValue            resonatorsFBControl;
+    std::vector<pdsp::Parameter>    resonators_control;    
+    pdsp::Parameter            dry_control;
+    pdsp::Parameter            positionControl;
+    pdsp::Parameter            densityControl;
+    pdsp::Parameter            fader;        
+    pdsp::Parameter            resonatorsFBControl;
     
     void smoothing( float ms );
     
@@ -54,21 +54,21 @@ private:
     
     pdsp::PatchNode     fbInput;
 
-    ofxPDSPValue        positionJitterControl;
-    ofxPDSPValue        lengthControl;
+    pdsp::Parameter        positionJitterControl;
+    pdsp::Parameter        lengthControl;
 
-    ofxPDSPValue        distanceJitterControl;
-    ofxPDSPValue        pitchJitterControl;
-    ofxPDSPValue        selectSampleControl;
+    pdsp::Parameter        distanceJitterControl;
+    pdsp::Parameter        pitchJitterControl;
+    pdsp::Parameter        selectSampleControl;
     
-    ofxPDSPValue        pitchControl;
+    pdsp::Parameter        pitchControl;
     
-    ofxPDSPValue            resonatorsPitchMaster;
-    std::vector<ofxPDSPValue>    resonatorsPitchControls;
+    pdsp::Parameter            resonatorsPitchMaster;
+    std::vector<pdsp::Parameter>    resonatorsPitchControls;
 
-    ofxPDSPValue            resonatorsLRSpreadControl;
+    pdsp::Parameter            resonatorsLRSpreadControl;
 
-    ofxPDSPValue            resonatorsDampControl;
+    pdsp::Parameter            resonatorsDampControl;
    
     int                     grainVoices;
 
@@ -84,8 +84,8 @@ private:
     pdsp::LFOPhazor         lfoPhazor;
     pdsp::CheapTri          lfo;
     pdsp::Amp               pitchModAmt;
-    ofxPDSPValue            pitchModControl;
-    ofxPDSPValue            pitchModSpeed;
+    pdsp::Parameter            pitchModControl;
+    pdsp::Parameter            pitchModSpeed;
 
     bool showLabel;
 

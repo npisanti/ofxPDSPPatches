@@ -34,9 +34,9 @@ private:
     void patch();
         
     pdsp::VAFilter  filter;
-    ofxPDSPValue    cutoffControl;
-    ofxPDSPValue    resoControl;
-    ofxPDSPValue    modeControl;
+    pdsp::Parameter    cutoffControl;
+    pdsp::Parameter    resoControl;
+    pdsp::Parameter    modeControl;
     pdsp::Amp       cutoffModAmt;
     
 };

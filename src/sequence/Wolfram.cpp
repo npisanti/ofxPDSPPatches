@@ -5,7 +5,7 @@
 #include "Wolfram.h"
 
 
-void ofx::patch::sequencer::Wolfram::setup( int maxSteps, int maxOutputs, int generations, int caSide, int totalHeight, std::string name) {
+void ofx::patch::sequence::Wolfram::setup( int maxSteps, int maxOutputs, int generations, int caSide, int totalHeight, std::string name) {
     
     this->caSide = caSide;
     int caw = caSide * maxOutputs * maxSteps;
@@ -50,14 +50,14 @@ void ofx::patch::sequencer::Wolfram::setup( int maxSteps, int maxOutputs, int ge
 }
 
 
-ofParameterGroup & ofx::patch::sequencer::Wolfram::label( std::string name ){
+ofParameterGroup & ofx::patch::sequence::Wolfram::label( std::string name ){
     parameters.setName( name );
     pdsp::Sequence::label = name;
     return parameters;
 }
 
 
-ofx::patch::sequencer::Wolfram::Wolfram(){
+ofx::patch::sequence::Wolfram::Wolfram(){
     
     // it is useful to have this inside the constructor
     // otherwise it could happen that the lambda take references not to the internal members
@@ -166,7 +166,7 @@ ofx::patch::sequencer::Wolfram::Wolfram(){
 }
 
 
-void ofx::patch::sequencer::Wolfram::draw(int x, int y) {
+void ofx::patch::sequence::Wolfram::draw(int x, int y) {
     
     // update bars graphics
     barsFbo.begin();
@@ -237,7 +237,7 @@ void ofx::patch::sequencer::Wolfram::draw(int x, int y) {
 
 
 //-----------------------------------------------------------------------------
-void ofx::patch::sequencer::Wolfram::Automaton1D::setup(int w, int h, int cells, int generationsNum, int rule, bool dsp ){
+void ofx::patch::sequence::Wolfram::Automaton1D::setup(int w, int h, int cells, int generationsNum, int rule, bool dsp ){
 
     xCells = cells;
     this->generationsNum = generationsNum;
@@ -255,7 +255,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::setup(int w, int h, int cells,
     resizeGraphics( w, h );
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::resizeGraphics(int w, int h) {
+void ofx::patch::sequence::Wolfram::Automaton1D::resizeGraphics(int w, int h) {
     gridFbo.allocate(w, h, GL_RGBA);
     gridFbo.begin();
         ofClear(255,255,255, 0);
@@ -281,11 +281,11 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::resizeGraphics(int w, int h) {
     
 }
     
-int ofx::patch::sequencer::Wolfram::Automaton1D::cell( const int & x, const int & y ) noexcept {
+int ofx::patch::sequence::Wolfram::Automaton1D::cell( const int & x, const int & y ) noexcept {
     return CA[y][x];
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::setRule( int rule ) noexcept { // init wolfram rules from number bits
+void ofx::patch::sequence::Wolfram::Automaton1D::setRule( int rule ) noexcept { // init wolfram rules from number bits
     this->rule = rule;
     int rulebits = rule;
     for(int i=0; i<8; ++i){ // inits the rules
@@ -295,7 +295,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::setRule( int rule ) noexcept {
     //ruleChanged = false;
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::advance() noexcept{ // update the automaton
+void ofx::patch::sequence::Wolfram::Automaton1D::advance() noexcept{ // update the automaton
     
     int oldGeneration = caGenerationIndex;
     caGenerationIndex--;
@@ -320,7 +320,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::advance() noexcept{ // update 
     
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::draw(){
+void ofx::patch::sequence::Wolfram::Automaton1D::draw(){
         
     if( updateCellsFbo ){
         cellsFbo.begin();
@@ -348,7 +348,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::draw(){
     gridFbo.draw( 0, 0);
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::initRandom( float density ) noexcept{
+void ofx::patch::sequence::Wolfram::Automaton1D::initRandom( float density ) noexcept{
     for( vector<int> & v: CA ){
         for( int i=0; i < (int)v.size(); ++i){
             v[i] = 0;
@@ -359,7 +359,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::initRandom( float density ) no
         for( int x=0; x < (int)(CA[caGenerationIndex].size()); ++x ){
             // pdspChange(float value) controls the chance of having an alive cell
             if(x%2==0){
-                CA[caGenerationIndex][x] = pdspChance(density) ? 1 : 0;                     
+                CA[caGenerationIndex][x] = pdsp::chance(density) ? 1 : 0;                     
             }else{
                 CA[caGenerationIndex][x] = 0;          
             }
@@ -383,7 +383,7 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::initRandom( float density ) no
     updateCellsFbo = true;
 }
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::clear() noexcept{
+void ofx::patch::sequence::Wolfram::Automaton1D::clear() noexcept{
     for( vector<int> & v: CA ){
         for( int i=0; i < (int)v.size(); ++i){
             v[i] = 0;
@@ -393,28 +393,28 @@ void ofx::patch::sequencer::Wolfram::Automaton1D::clear() noexcept{
 }
 
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::initCanonical() noexcept{
+void ofx::patch::sequence::Wolfram::Automaton1D::initCanonical() noexcept{
     initRandom( 0.25f );
 }
 
 
-const int ofx::patch::sequencer::Wolfram::Automaton1D::generations() const {
+const int ofx::patch::sequence::Wolfram::Automaton1D::generations() const {
     return generationsNum;
 }
 
-const int ofx::patch::sequencer::Wolfram::Automaton1D::cells() const {
+const int ofx::patch::sequence::Wolfram::Automaton1D::cells() const {
     return xCells;
 }
 
 
-void ofx::patch::sequencer::Wolfram::Automaton1D::draw( int x, int y) {
+void ofx::patch::sequence::Wolfram::Automaton1D::draw( int x, int y) {
     ofPushMatrix();
     ofTranslate( x, y );
         draw();
     ofPopMatrix();
 }
     
-int ofx::patch::sequencer::Wolfram::Automaton1D::getRule( ) const {
+int ofx::patch::sequence::Wolfram::Automaton1D::getRule( ) const {
     return rule;
 }
     

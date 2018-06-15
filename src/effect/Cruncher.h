@@ -40,10 +40,10 @@ private:
     pdsp::Bitcruncher   bitcrunch1;
     pdsp::PitchToFreq   p2f;
 
-    ofxPDSPValue    cutoffControl;
-    ofxPDSPValue    cutoffModControl;
-    pdsp::Amp       cutoffModAmt;
-    ofxPDSPValue    bitsControl;
+    pdsp::Parameter     cutoffControl;
+    pdsp::Parameter     cutoffModControl;
+    pdsp::Amp           cutoffModAmt;
+    pdsp::Parameter     bitsControl;
 
 };
     

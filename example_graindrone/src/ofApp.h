@@ -24,7 +24,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    ofxPDSPEngine       engine;
+    pdsp::Engine       engine;
     ofxPanel            gui;
     ofxPanel            samples;
 

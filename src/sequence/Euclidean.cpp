@@ -5,13 +5,13 @@
 #include "Euclidean.h"
 
 
-ofx::patch::sequencer::Euclidean::Euclidean(){
+ofx::patch::sequence::Euclidean::Euclidean(){
 
     //bars.reserve(256);    
     bars.resize(256);
     for(float & value : bars ) value = 0.0f;
 
-    string name = "euclidean sequencer";
+    string name = "euclidean sequence";
     pdsp::Sequence::label = name;
     parameters.setName( name );
     
@@ -66,20 +66,20 @@ ofx::patch::sequencer::Euclidean::Euclidean(){
                 m = newXMin;
                 n = lastY;
                 while( n==lastY ){
-                    n = pdspDice( newYMin, newYMax+1 );
+                    n = pdsp::dice( newYMin, newYMax+1 );
                 }
             }else if( newYMin == newYMax ){
                 m = lastX;
                 while( m==lastX ){
-                    m = pdspDice( newXMin, newXMax+1 );
+                    m = pdsp::dice( newXMin, newXMax+1 );
                 }
                 n = newYMin;
             }else{
                 m = lastX;
                 n = lastY;
                 while( m==lastX && n==lastY ){
-                    m = pdspDice( newXMin, newXMax+1 );
-                    n = pdspDice( newYMin, newYMax+1 );
+                    m = pdsp::dice( newXMin, newXMax+1 );
+                    n = pdsp::dice( newYMin, newYMax+1 );
                 }
             }
             lastX = m;
@@ -93,7 +93,7 @@ ofx::patch::sequencer::Euclidean::Euclidean(){
             
             float gmin = ghostsDynMin;
             float gadd = ghostsDynMax - gmin; 
-            ghost_chance( bars, gmin + pdspURan()*gadd, ghostsChance);
+            ghost_chance( bars, gmin + pdsp::urand()*gadd, ghostsChance);
             
             shift( bars, seqShift );
             
@@ -110,7 +110,7 @@ ofx::patch::sequencer::Euclidean::Euclidean(){
     
 }
 
-ofParameterGroup & ofx::patch::sequencer::Euclidean::label( string name ){
+ofParameterGroup & ofx::patch::sequence::Euclidean::label( string name ){
     pdsp::Sequence::label = name;
     parameters.setName( name );
     return parameters;
@@ -118,7 +118,7 @@ ofParameterGroup & ofx::patch::sequencer::Euclidean::label( string name ){
 
    
 // ------------------ rhytm generation methods --------------------------------
-int ofx::patch::sequencer::Euclidean::gcd( int x, int y ) {
+int ofx::patch::sequence::Euclidean::gcd( int x, int y ) {
        if( x < y )
           std::swap( x, y );
 
@@ -131,7 +131,7 @@ int ofx::patch::sequencer::Euclidean::gcd( int x, int y ) {
        return x;
  }  
 
-void ofx::patch::sequencer::Euclidean::cword ( std::vector<float> & vect, int x, int y, bool upper) {
+void ofx::patch::sequence::Euclidean::cword ( std::vector<float> & vect, int x, int y, bool upper) {
 
     // clean vector
     for( float & value : vect ) value = 0.0f;
@@ -185,7 +185,7 @@ void ofx::patch::sequencer::Euclidean::cword ( std::vector<float> & vect, int x,
 }
  
 
-void ofx::patch::sequencer::Euclidean::shift ( std::vector<float> & vect, int shiftAmount) {
+void ofx::patch::sequence::Euclidean::shift ( std::vector<float> & vect, int shiftAmount) {
     if(shiftAmount!=0){
         if( shiftAmount < 0 ){
             shiftAmount = vect.size() + shiftAmount;
@@ -195,7 +195,7 @@ void ofx::patch::sequencer::Euclidean::shift ( std::vector<float> & vect, int sh
 }
 
 
-void ofx::patch::sequencer::Euclidean::ghost_all ( std::vector<float> & vect, float dynamic ) {
+void ofx::patch::sequence::Euclidean::ghost_all ( std::vector<float> & vect, float dynamic ) {
     
     for( size_t i=0; i<vect.size(); ++i){
         if( vect[i] == 0.0f ){
@@ -206,7 +206,7 @@ void ofx::patch::sequencer::Euclidean::ghost_all ( std::vector<float> & vect, fl
 }
 
 
-void ofx::patch::sequencer::Euclidean::ghost_chance ( std::vector<float> & vect, float dynamic, float chance) {
+void ofx::patch::sequence::Euclidean::ghost_chance ( std::vector<float> & vect, float dynamic, float chance) {
     
     bool fill;
     if ( vect[0] == 0.0f ){

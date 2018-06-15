@@ -5,7 +5,7 @@
 #include "MarkovChain.h"
 
 
-ofx::patch::sequencer::MarkovChain::MarkovChain(){
+ofx::patch::sequence::MarkovChain::MarkovChain(){
     
     chains.resize(12); // 12 chains buffer
     
@@ -80,7 +80,7 @@ ofx::patch::sequencer::MarkovChain::MarkovChain(){
                             state = chains[read].first;
                         }else{
                             // markov chain next
-                            float outcome = pdspURan();
+                            float outcome = pdsp::urand();
                             float target = 0.0f;
                             int next = chains[read].nodes -1;
                             
@@ -118,7 +118,7 @@ ofx::patch::sequencer::MarkovChain::MarkovChain(){
 }
 
 
-void ofx::patch::sequencer::MarkovChain::load ( std::string filepath, bool autoreload ) {
+void ofx::patch::sequence::MarkovChain::load ( std::string filepath, bool autoreload ) {
     path = filepath;
     auto v = ofSplitString(path, "/" );
     string name = v[v.size()-1];
@@ -140,7 +140,7 @@ void ofx::patch::sequencer::MarkovChain::load ( std::string filepath, bool autor
 
 // -------------------- file loading routines ------------------------
 
-void ofx::patch::sequencer::MarkovChain::loadFile( ) {    
+void ofx::patch::sequence::MarkovChain::loadFile( ) {    
 	
 	ofFile file( path );
 	
@@ -304,23 +304,23 @@ void ofx::patch::sequencer::MarkovChain::loadFile( ) {
 
 
 
-const int ofx::patch::sequencer::MarkovChain::getStep() const {
+const int ofx::patch::sequence::MarkovChain::getStep() const {
     return meter_step;
 }
 
-const int ofx::patch::sequencer::MarkovChain::getState() const {
+const int ofx::patch::sequence::MarkovChain::getState() const {
     return meter_state;
 }
 
-const std::vector<int> ofx::patch::sequencer::MarkovChain::getStates() const {
+const std::vector<int> ofx::patch::sequence::MarkovChain::getStates() const {
     return states;
 }
 
-const int ofx::patch::sequencer::MarkovChain::getSize() const {
+const int ofx::patch::sequence::MarkovChain::getSize() const {
     return states.size();
 }
 
-void ofx::patch::sequencer::MarkovChain::draw ( int x, int y ) {
+void ofx::patch::sequence::MarkovChain::draw ( int x, int y ) {
     std::string theorem = parameters.getName();
     theorem +=": ";
     for (size_t i=0; i<states.size(); i++){

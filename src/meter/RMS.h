@@ -19,9 +19,9 @@ public:
 
     float meter() const;
 
-    ofxPDSPValue     attackControl;
-    ofxPDSPValue     releaseControl;
-    ofxPDSPMonoFader gain;
+    pdsp::Parameter     attackControl;
+    pdsp::Parameter     releaseControl;
+    pdsp::ParameterGain gain;
     
 private:
     pdsp::RMSDetector       rms;

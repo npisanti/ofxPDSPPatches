@@ -18,7 +18,7 @@ void ofApp::setup(){
     midiKeys.setMonoMode(1, true);
 
     // activate portamento, in poly mode you can notice portamento only on note stealing
-    midiKeys.setPortamento(On, 150.0f, pdsp::Rate);
+    midiKeys.setPortamento(pdsp::On, 150.0f, pdsp::Rate);
 
     midiKeys.outs_trig[0]  >> monosynth.in("trig");
     midiKeys.outs_pitch[0] >> monosynth.in("pitch");

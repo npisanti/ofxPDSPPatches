@@ -50,17 +50,17 @@ private:
     
     pdsp::PatchNode input0;
     
-    ofxPDSPStereoFader makeup;
+    pdsp::ParameterGain makeup;
     
-    ofxPDSPValue    attackControl;
-    ofxPDSPValue    releaseControl;
-    ofxPDSPValue    thresholdControl;
-    ofxPDSPValue    kneeControl;
-    ofxPDSPValue    clipThreshold;
+    pdsp::Parameter    attackControl;
+    pdsp::Parameter    releaseControl;
+    pdsp::Parameter    thresholdControl;
+    pdsp::Parameter    kneeControl;
+    pdsp::Parameter    clipThreshold;
     
     float threshold(){ return thresholdControl.getOFParameterInt(); }
     
-    ofxPDSPScope                scope;
+    pdsp::Scope                scope;
 };
     
 }}}

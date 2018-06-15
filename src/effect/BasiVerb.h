@@ -28,14 +28,15 @@ public:
 private:    
     void patch();
         
-    pdsp::BasiVerb 	reverb;
-    ofxPDSPStereoFader	gain;
-    ofxPDSPValue    timeControl;
-    ofxPDSPValue    densityControl;
-    ofxPDSPValue    dampingControl;
-    ofxPDSPValue    hiCutControl;
-    ofxPDSPValue    modFreqControl;
-    ofxPDSPValue    modAmountControl;
+    pdsp::BasiVerb 	    reverb;
+    
+    pdsp::ParameterGain	gain;
+    pdsp::Parameter     timeControl;
+    pdsp::Parameter     densityControl;
+    pdsp::Parameter     dampingControl;
+    pdsp::Parameter     hiCutControl;
+    pdsp::Parameter     modFreqControl;
+    pdsp::Parameter     modAmountControl;
     
 };
     

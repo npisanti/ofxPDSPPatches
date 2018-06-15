@@ -14,10 +14,10 @@ public:
     
     ofParameterGroup parameters;
 
-    ofxPDSPValueMultiplier  lDelayTimeControl;
-    ofxPDSPValueMultiplier  rDelayTimeControl;
-    ofxPDSPValue            lFeedbackControl;
-    ofxPDSPValue            rFeedbackControl;
+    pdsp::ParameterAmp  lDelayTimeControl;
+    pdsp::ParameterAmp  rDelayTimeControl;
+    pdsp::Parameter     lFeedbackControl;
+    pdsp::Parameter     rFeedbackControl;
 
     pdsp::Patchable & in_0();
     pdsp::Patchable & in_1();
@@ -36,18 +36,18 @@ private:
 
     pdsp::LFOPhazor         phazor;
     pdsp::CheapTri          LFO;
-    ofxPDSPValueMultiplier  modAmt;
-    ofxPDSPValue            speed;
+    pdsp::ParameterAmp      modAmt;
+    pdsp::Parameter         speed;
 
-    pdsp::DampedDelay ldelay;
-    pdsp::DampedDelay rdelay;
+    pdsp::Delay ldelay;
+    pdsp::Delay rdelay;
     
     pdsp::OneBarTimeMs time;
 
-    ofxPDSPValue dampingControl;
+    pdsp::Parameter dampingControl;
     
-    ofxPDSPStereoFader input;
-    ofxPDSPStereoFader output;
+    pdsp::ParameterGain input;
+    pdsp::ParameterGain output;
     
 };
 

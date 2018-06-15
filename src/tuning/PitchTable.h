@@ -22,7 +22,7 @@ public:
     
     void set( int i, float pitch );
 
-    std::vector<ofxPDSPValue> pitch;
+    std::vector<pdsp::Parameter> pitch;
     
     ofParameterGroup parameters;    
 

@@ -24,8 +24,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         
-        ofxPDSPEngine                   engine;
+        pdsp::Engine                    engine;
         ofx::patch::synth::QuickSampler sampler;
-        ofxPDSPTrigger                  trig;
+        pdsp::TriggerControl            trig;
         ofxPanel                        gui;
 };

@@ -31,12 +31,9 @@ private:
     void patch();
         
     pdsp::DimensionChorus chorus;
-    ofxPDSPValue    speedControl;
-    ofxPDSPValue    depthControl;
-    
-    ofxPDSPValue    bypass;
-    pdsp::Switch    bp0;
-    pdsp::Switch    bp1;
+    pdsp::Parameter    speedControl;
+    pdsp::Parameter    depthControl;
+
 };
     
 }}} // end namespaces 

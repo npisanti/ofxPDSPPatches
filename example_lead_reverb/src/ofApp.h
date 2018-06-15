@@ -28,15 +28,14 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         
-        ofxPDSPEngine   engine;
-
+        pdsp::Engine   engine;
 
         SynthVoice monosynth;
         
-        ofxPDSPMonoFader    fader;
+        pdsp::ParameterGain    fader;
         
-        ofxPDSPMidiIn        midiIn;
-        ofxPDSPMidiKeys      midiKeys;
+        pdsp::midi::Input        midiIn;
+        pdsp::midi::Keys         midiKeys;
 
         ofx::patch::effect::BasiVerb       reverb;
         
@@ -48,7 +47,7 @@ class ofApp : public ofBaseApp{
         ofx::patch::effect::Chorus  chorus;
         ofx::patch::effect::StereoDelay  delays;
         
-        ofxPDSPValue         attack;
+        pdsp::Parameter      attack;
         
         ofxPanel             gui;
     
