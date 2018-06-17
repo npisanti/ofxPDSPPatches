@@ -37,8 +37,10 @@ ofx::patch::sequence::Tracker::Tracker() {
 
             double length = (double)steps / division;
             int read = index; // memorize the index from which we read, as index can be changed by another thread
-
-            begin( division, length);
+            
+            bars = length;
+            steplen = 1.0/double(division);
+            begin();
                 if( !values.empty() && bLoaded ){
                     for( int i=start; i<(int)values[read].size() && i<(steps+start); ++i ) {
                         for( size_t o=0; o<values[read][i].size() && i<(steps+start); ++o ) {

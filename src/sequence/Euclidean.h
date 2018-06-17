@@ -30,7 +30,7 @@ public:
     
     ofParameter<float>  gate;        
 
-    std::vector<float> bars;
+    std::vector<float> values;
         
     ofParameterGroup & label( std::string name );
 

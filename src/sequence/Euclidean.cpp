@@ -7,9 +7,9 @@
 
 ofx::patch::sequence::Euclidean::Euclidean(){
 
-    //bars.reserve(256);    
-    bars.resize(256);
-    for(float & value : bars ) value = 0.0f;
+    //values.reserve(256);    
+    values.resize(256);
+    for(float & value : values ) value = 0.0f;
 
     string name = "euclidean sequence";
     pdsp::Sequence::label = name;
@@ -89,18 +89,18 @@ ofx::patch::sequence::Euclidean::Euclidean(){
             // probably some combination produces the same pattern
             // like this it's cheaper on the CPU, so it's fine
                 
-            cword( bars, m, n, true);
+            cword( values, m, n, true);
             
             float gmin = ghostsDynMin;
             float gadd = ghostsDynMax - gmin; 
-            ghost_chance( bars, gmin + pdsp::urand()*gadd, ghostsChance);
+            ghost_chance( values, gmin + pdsp::urand()*gadd, ghostsChance);
             
-            shift( bars, seqShift );
+            shift( values, seqShift );
             
-            double length = (double) steps / division;
-
-            begin( division, length);
-                trigVector(bars, g, 0);
+            bars = double(steps) / double(division);
+            steplen = 1.0 / double(division);
+            begin();
+                trigVector(values, g, 0);
             end();
             
             regenerate = false;

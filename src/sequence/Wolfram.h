@@ -77,7 +77,7 @@ public:
     ofParameter<bool>    regenerate;
     ofParameter<bool>    gateOff;
             
-    vector<float>   bars;    
+    vector<float>   stepbars;    
     Automaton1D     ca;
 
     ofParameterGroup parameters;
@@ -88,7 +88,7 @@ private:
 
     atomic<int>     actionCode; // 0 advance | 1 clear | 2 random | 3 random & fill
 
-    ofFbo   barsFbo;
+    ofFbo   stepbarsFbo;
 
     int     cah;
     int     caSide;

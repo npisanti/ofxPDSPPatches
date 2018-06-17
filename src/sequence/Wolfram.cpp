@@ -12,12 +12,12 @@ void ofx::patch::sequence::Wolfram::setup( int maxSteps, int maxOutputs, int gen
     this->cah = caSide * generations;
     this->maxSteps = maxSteps;
     this->maxOutputs = maxOutputs;
-    this->sequenceLength = ((double) maxSteps) / division;
+    this->bars = ((double) maxSteps) / division;
 
     barHeight = totalHeight - cah - 40;
     
     values.resize(maxOutputs);
-    bars.resize(maxOutputs*maxSteps);
+    stepbars.resize(maxOutputs*maxSteps);
 
     pdsp::Sequence::label = name;
     parameters.setName( name );
@@ -27,7 +27,7 @@ void ofx::patch::sequence::Wolfram::setup( int maxSteps, int maxOutputs, int gen
     parameters.add( this->activeOuts.set( "active outs", maxOutputs, 0, maxOutputs ));
     parameters.add( this->threshold.set( "threshold", 4, 0, 8 ));
     parameters.add( this->seedsDensity.set( "seeds density", 0.33f, 0.0f, 1.0f ));
-    parameters.add( this->reverse.set( "reverse bars", false) );
+    parameters.add( this->reverse.set( "reverse steps", false) );
     parameters.add( this->gateOff.set( "send gate off", false) );
     parameters.add( this->gateLen.set( "gate len", 0.5f, 0.001f, 0.999f) );
     parameters.add( this->regenerate.set( "regenerate", false) );
@@ -43,10 +43,10 @@ void ofx::patch::sequence::Wolfram::setup( int maxSteps, int maxOutputs, int gen
     
     ca.setup( caw, cah, maxSteps * maxOutputs, generations, rule );
     
-    barsFbo.allocate(caw+2, barHeight + 20 + 2);
-    barsFbo.begin();
+    stepbarsFbo.allocate(caw+2, barHeight + 20 + 2);
+    stepbarsFbo.begin();
         ofClear(0, 0, 0, 0);
-    barsFbo.end();
+    stepbarsFbo.end();
 }
 
 
@@ -119,7 +119,7 @@ ofx::patch::sequence::Wolfram::Wolfram(){
         // wolfram to seqs ---------------------------------
         int b;
         if(reverse){
-            b = bars.size()-1;
+            b = stepbars.size()-1;
         }else{
             b=0;
         }
@@ -135,7 +135,7 @@ ofx::patch::sequence::Wolfram::Wolfram(){
             intensity *= scaling;
             if(intensity > 1.0f) intensity = 1.0f;
 
-            bars[b] = intensity;
+            stepbars[b] = intensity;
             
             if(reverse){
                 b--;
@@ -144,13 +144,16 @@ ofx::patch::sequence::Wolfram::Wolfram(){
             }
         }
         
-        sequenceLength = ((double) steps) / division;
+        
         // seqs array to messages ---------------------------
-        begin( (double) division, sequenceLength );       
+        bars = double(steps) / double(division);
+        steplen = 1.0 / double(division);
+        
+        begin();       
             for(int x=0; x<steps; ++x){
                 
                 for(int out=0; out < activeOutsStored; ++out) {
-                    values[out] = bars[ (out*steps) + x ];
+                    values[out] = stepbars[ (out*steps) + x ];
                 }
                 
                 for(int out=0; out < activeOutsStored; ++out){
@@ -168,8 +171,8 @@ ofx::patch::sequence::Wolfram::Wolfram(){
 
 void ofx::patch::sequence::Wolfram::draw(int x, int y) {
     
-    // update bars graphics
-    barsFbo.begin();
+    // update stepbars graphics
+    stepbarsFbo.begin();
         ofClear(0, 0, 0, 0);
         ofTranslate(1,1);
 
@@ -188,7 +191,7 @@ void ofx::patch::sequence::Wolfram::draw(int x, int y) {
             }
             ofFill();
             
-            float height = bars[x] * barHeight;
+            float height = stepbars[x] * barHeight;
             float yy = barHeight - height;
             ofDrawRectangle(caSide*x, yy, caSide, height); 
        
@@ -220,7 +223,7 @@ void ofx::patch::sequence::Wolfram::draw(int x, int y) {
             
             ofTranslate(playheadW,0);
         }
-    barsFbo.end();
+    stepbarsFbo.end();
     
     // draw everything
     ofPushMatrix();
@@ -230,7 +233,7 @@ void ofx::patch::sequence::Wolfram::draw(int x, int y) {
         
         ofTranslate(0, cah+20);
         
-        barsFbo.draw(0, 0);
+        stepbarsFbo.draw(0, 0);
     
     ofPopMatrix();
 }

@@ -73,7 +73,9 @@ ofx::patch::sequence::MarkovChain::MarkovChain(){
             
             int read = index;
             
-            begin( div, length );
+            steplen = 1.0 / double(div);
+            bars = length;
+            begin();
                     // markov chain code ------------------------
                     if( step==counter() ){   // step is == counter only once until resetCount() is called  
                         if(step == 0 ) { 
