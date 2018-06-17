@@ -100,7 +100,12 @@ ofx::patch::sequence::Euclidean::Euclidean(){
             bars = double(steps) / double(division);
             steplen = 1.0 / double(division);
             begin();
-                trigVector(values, g, 0);
+                for( size_t i=0; i<values.size(); ++i){
+                    if(values[i]>0.0f){
+                        message( i, values[i], 0);
+                        message( i+g, 0.0f, 0);
+                    }
+                }
             end();
             
             regenerate = false;
