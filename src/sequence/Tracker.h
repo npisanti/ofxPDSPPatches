@@ -4,9 +4,10 @@
 #include "ofMain.h"
 #include "ofxPDSP.h"
 
-#if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)
+#if !defined(__ANDROID__) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
 #include "ofxWatchFile.h"
 #endif 
+
 
 namespace ofx { namespace patch { namespace sequence {
     
@@ -37,12 +38,13 @@ private:
 
     void loadFile();
 
-#if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)    
+
+#if !defined(__ANDROID__) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
     ofxWatchFile watcher;
     void onFileChange( ofFile &file ){
         loadFile();
     }
-#endif 
+#endif
 
     std::string path;
 

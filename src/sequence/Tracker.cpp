@@ -66,7 +66,7 @@ void ofx::patch::sequence::Tracker::load( std::string filepath, bool autoreload 
     
     parameters.setName(name);
     pdsp::Sequence::label = name;
-#if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)    
+#if !defined(__ANDROID__) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
     if( autoreload ){
         watcher.setCheckIntervalTimef( 0.03f );
         watcher.addListener(this, &Tracker::onFileChange);

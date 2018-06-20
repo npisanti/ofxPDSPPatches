@@ -4,7 +4,7 @@
 #include "ofMain.h"
 #include "ofxPDSP.h"
 
-#if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)
+#if !defined(__ANDROID__) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
 #include "ofxWatchFile.h"
 #endif 
 
@@ -45,7 +45,7 @@ public:
 private:
     void loadFile();
 
-#if !defined(OF_TARGET_ANDROID) || !defined(OF_TARGET_IOS)    
+#if !defined(__ANDROID__) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
     ofxWatchFile watcher;
     void onFileChange( ofFile &file ){
         loadFile();
