@@ -1,9 +1,9 @@
 ofxPDSPPatches
 =====================================
 
-This is a set of high level classes that builds upon [ofxPDSP](https://github.com/npisanti/ofxPDSP).  [ofxWatchFile](https://github.com/nariakiiwatani/ofxWatchFile.git) is also required for some classes to work, but not on Android and iOS. All the classes have a `ofParameterGroup parameters` member that can be easily added to a gui for tweaking things faster in realtime. Some `ofx::patch::sequencer` loads text file in realtime and are updated when the text file changes.
+This is a set of high level classes that builds upon [ofxPDSP](https://github.com/npisanti/ofxPDSP).  [ofxWatchFile](https://github.com/nariakiiwatani/ofxWatchFile.git) is also required for some classes to work, but not on Android and iOS. All the classes have a `ofParameterGroup parameters` member that can be easily added to a gui for tweaking things faster in realtime. Some `ofx::patch::sequence` loads text file in realtime and are updated when the text file changes.
 
-Included `ofx::patch::sequencer`:
+Included `ofx::patch::sequence`:
 - `Euclidean` : euclidean rhythm generator
 - `Tracker` : file based tracker with probability for each step 
 - `MarkovChain` : file based markov chain sequence
@@ -18,6 +18,12 @@ Included `ofx::patch::synth` :
 - `QuickSampler` : loads a single sample right even from the gui on the fly
 - `SinePercussion` : zaps and beeps percussion
 - `WaveSynth` : wavetable based synthesizer
+
+Included `ofx::patch::modulator` :   
+- `ClockedLFO` : clocked LFO with timing and starting phase control   
+
+Included `ofx::patch::meter` :   
+- `RMS` : a fast to use RMS meter module 
 
 Included `ofx::patch::effect` :
 - `BasiVerb` : pdsp::BasiVerb wrapper with all the parameters on the gui
