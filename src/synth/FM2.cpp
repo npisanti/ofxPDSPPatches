@@ -28,21 +28,22 @@ ofParameterGroup & ofx::patch::synth::FM2::setup( int numVoices, float spread, s
 
     // CONTROLS ---------------------------------------------------------------
     parameters.setName( name );
-
-    parameters.add( self_ctrl.set("self fb", 0.0f, 0.0f, 1.0f) );
+    
+    parameters.add(gain.set("gain", -12, -48, 12));
+    
     parameters.add(ratio_ctrl.set( "ratio coarse", 1, 1, 21) );
-    parameters.add(ratio_ctrl.set( "ratio fine", 0.0f, -0.5f, 0.5f) );
-    parameters.add( fm_ctrl.set( "fm", 0.0f, 0.0f, 4.0f) );
-
+    parameters.add(ratio_ctrl.set( "ratio fine", 0.0f, -1.0f, 0.0f) );
+    parameters.add( fm_ctrl.set( "fm", 0.0f, 0.0f, 4.0f) );    
+    parameters.add( fm_mod.set( "fm mod", 0.0f, 0.0f, 4.0f) );
+    parameters.add( self_ctrl.set("self fb", 0.0f, 0.0f, 1.0f) );
+    parameters.add( self_mod.set("self fb mod", 0.2f, 0.0f, 0.5f) );    
+    parameters.add( drift.set("drift", 0.0f, 0.0f, 1.0f) );    
+    
     parameters.add(env_attack_ctrl.set( "env attack", 400, 5, 4000) );
     parameters.add(env_decay_ctrl.set(  "env decay", 400, 5, 10000) );
     parameters.add(env_sustain_ctrl.set("env sustain", 1.0f, 0.0f, 1.0f) );
     parameters.add(env_release_ctrl.set("env release", 900, 5, 8000));    
-    parameters.add( fm_mod.set( "env fm mod", 0.0f, 0.0f, 4.0f) );
-    parameters.add( self_mod.set("env self mod", 0.2f, 0.0f, 0.5f) );    
-    parameters.add( drift.set("drift", 0.0f, 0.0f, 1.0f) );    
 
-    parameters.add(gain.set("gain", -12, -48, 12));
     gain.enableSmoothing(50.f);
     self_ctrl.enableSmoothing( 200.0f );
     fm_ctrl.enableSmoothing( 200.0f );

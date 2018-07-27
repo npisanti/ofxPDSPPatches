@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <gui>
-	<lead>
+	<fm_lead>
 		<self_fb>0</self_fb>
 		<ratio_coarse>1</ratio_coarse>
 		<ratio_fine>0</ratio_fine>
@@ -9,11 +9,11 @@
 		<env_decay>7000</env_decay>
 		<env_sustain>0.3</env_sustain>
 		<env_release>1200</env_release>
-		<env_fm_mod>0</env_fm_mod>
-		<env_self_mod>0.25</env_self_mod>
+		<fm_mod>0</fm_mod>
+		<self_fb_mod>0.25</self_fb_mod>
 		<drift>0</drift>
 		<gain>-12</gain>
-	</lead>
+	</fm_lead>
 	<reverb>
 		<reverb_gain>-9</reverb_gain>
 		<rt60>3.33</rt60>

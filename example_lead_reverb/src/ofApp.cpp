@@ -58,7 +58,7 @@ void ofApp::setup(){
     gui.setDefaultBackgroundColor(ofColor(0,0,0));
 
     gui.setup("gui", "settings.xml", 20, 20);
-    gui.add( lead.label("lead") );
+    gui.add( lead.label("fm lead") );
     gui.add( reverb.parameters );
     gui.add( delays.parameters );
     gui.loadFromFile("settings.xml");
