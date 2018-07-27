@@ -1,12 +1,24 @@
 <?xml version="1.0"?>
 <gui>
-	<synth_gain>-6</synth_gain>
-	<attack>350</attack>
+	<lead>
+		<self_fb>0</self_fb>
+		<ratio_coarse>1</ratio_coarse>
+		<ratio_fine>0</ratio_fine>
+		<fm>0</fm>
+		<env_attack>500</env_attack>
+		<env_decay>7000</env_decay>
+		<env_sustain>0.3</env_sustain>
+		<env_release>1200</env_release>
+		<env_fm_mod>0</env_fm_mod>
+		<env_self_mod>0.25</env_self_mod>
+		<drift>0</drift>
+		<gain>-12</gain>
+	</lead>
 	<reverb>
-		<reverb_gain>0</reverb_gain>
+		<reverb_gain>-9</reverb_gain>
 		<rt60>3.33</rt60>
 		<density>0.5</density>
-		<damping>0.6</damping>
+		<damping>0.5</damping>
 		<high_cut_freq>5000</high_cut_freq>
 		<mod_speed__hz_>0.2</mod_speed__hz_>
 		<mod_depth__ms_>0.8</mod_depth__ms_>
@@ -19,7 +31,7 @@
 		<R_feedback>0.4</R_feedback>
 		<damping>0.5</damping>
 		<mod_speed__hz_>0.25</mod_speed__hz_>
-		<mod_depth__ms_>1.5</mod_depth__ms_>
+		<mod_depth__ms_>0</mod_depth__ms_>
 		<output_gain>0</output_gain>
 	</stereo_delay>
 </gui>

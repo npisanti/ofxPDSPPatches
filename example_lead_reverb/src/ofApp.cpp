@@ -12,30 +12,28 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    ofSetWindowTitle("brass lead + rev/delay");
+    ofSetWindowTitle("fm lead + rev/delay");
     engine.score.setTempo(86.0f); // the delay times are clocked
+
+    lead.setup(1);
 
     midiKeys.setMonoMode(1, true);
 
     // activate portamento, in poly mode you can notice portamento only on note stealing
     midiKeys.setPortamento(pdsp::On, 150.0f, pdsp::Rate);
 
-    midiKeys.outs_trig[0]  >> monosynth.in("trig");
-    midiKeys.outs_pitch[0] >> monosynth.in("pitch");
-        
-    attack >> monosynth.in("attack");
-    monosynth >> fader;
+    midiKeys.outs_trig[0]  >> lead.voices[0].in("trig");
+    midiKeys.outs_pitch[0] >> lead.voices[0].in("pitch");
     
-    
-    fader >> reverb.in();
-    fader >> delays.in_L();
-    fader >> delays.in_R();    
+    lead.out_L() >> reverb.in();
+    lead.out_L() >> delays.in_L();
+    lead.out_R() >> delays.in_R();    
 
     delays.out_L() >> reverb.in();
     delays.out_R() >> reverb.in();
     
-    fader >> engine.audio_out(0);
-    fader >> engine.audio_out(1);
+    lead.out_L() >> engine.audio_out(0);
+    lead.out_L() >> engine.audio_out(1);
     
     reverb.out_0() >> engine.audio_out(0);
     reverb.out_1() >> engine.audio_out(1);
@@ -60,8 +58,7 @@ void ofApp::setup(){
     gui.setDefaultBackgroundColor(ofColor(0,0,0));
 
     gui.setup("gui", "settings.xml", 20, 20);
-    gui.add( fader.set("synth gain", -6, -48, 24) );
-    gui.add( attack.set("attack", 350.0f, 20.0f, 700.0f));
+    gui.add( lead.label("lead") );
     gui.add( reverb.parameters );
     gui.add( delays.parameters );
     gui.loadFromFile("settings.xml");

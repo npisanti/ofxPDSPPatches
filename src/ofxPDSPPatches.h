@@ -29,6 +29,7 @@
 #include "synth/GrainDrone.h"
 #include "synth/DataSynth.h"
 #include "synth/WaveSynth.h"
+#include "synth/FM2.h"
 
 #include "tuning/PitchTable.h"
 #include "tuning/PureTuning.h"

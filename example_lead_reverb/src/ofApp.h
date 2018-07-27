@@ -5,7 +5,7 @@
 #include "ofxPDSP.h"
 #include "ofxPDSPPatches.h"
 #include "ofxGui.h"
-#include "voice.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -29,14 +29,13 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
         
         pdsp::Engine   engine;
-
-        SynthVoice monosynth;
         
         pdsp::ParameterGain    fader;
         
         pdsp::midi::Input        midiIn;
         pdsp::midi::Keys         midiKeys;
 
+        ofx::patch::synth::FM2 lead;
         ofx::patch::effect::BasiVerb       reverb;
         
         pdsp::OneBarTimeMs   barMs;
