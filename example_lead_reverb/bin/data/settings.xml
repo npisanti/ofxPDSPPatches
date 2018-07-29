@@ -2,7 +2,7 @@
 <gui>
 	<fm_lead>
 		<self_fb>0</self_fb>
-		<ratio_coarse>1</ratio_coarse>
+		<ratio_coarse>2</ratio_coarse>
 		<ratio_fine>0</ratio_fine>
 		<fm>0</fm>
 		<env_attack>500</env_attack>
